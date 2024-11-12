@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Category Section -->
+<section class="category-products-section py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">{{ category.name }} - Products</h2>
+    
+    <!-- Filter Options Form -->
+    <form method="get" class="filters-form mb-4" action="{% url 'category_products' category.id %}">
+      <div class="row">
+        <!-- Filter by Brand -->
+        <div class="col-md-6 mb-3">
+          <label for="brand" class="form-label">Filter by Brand:</label>
+          <select name="brand" id="brand" class="form-select" onchange="this.form.submit()">
+            <option value="">All Brands</option>
+            {% for brand in brands %}
+              <option value="{{ brand.id }}" {% if brand.id|stringformat:"s" == request.GET.brand %}selected{% endif %}>
+                {{ brand.name }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Filter by Product Model -->
+        <div class="col-md-6 mb-3">
+          <label for="products" class="form-label">Filter by Products:</label>
+          <select name="products" id="products" class="form-select" onchange="this.form.submit()">
+              <option value="">All Products</option>
+              {% for product in products %}
+                  <option value="{{ product.id }}" {% if product.id|stringformat:"s" == request.GET.products %}selected{% endif %}>
+                      {{ product.name }}
+                  </option>
+              {% endfor %}
+          </select>
+        </div>
+      </div>
+    </form>
+    
+    <!-- Product Listing -->
+    <div class="row">
+      {% for product in products %}
+        <div class="col-md-4 mb-4">
+          <!-- Correct URL for product detail page -->
+          <a href="{% url 'product_detail' product.id %}" class="product-link">
+            <div class="card shadow-sm rounded-lg border-0">
+              <div class="card-img-container">
+                {% if product.image %}
+                  <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                {% else %}
+                  <img src="{% static 'images/default-image.png' %}" class="card-img-top product-image" alt="No image available">
+                {% endif %}
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-center">{{ product.name }}</h5>
+                <p class="card-text text-muted">{{ product.description|truncatewords:20 }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% empty %}
+        <p class="text-center w-100">No products available in this category.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* General Styling */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+
+  .category-products-section {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Filter Form */
+  .filters-form .form-label {
+    font-weight: bold;
+  }
+
+  .filters-form .form-select {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s;
+  }
+
+  .filters-form .form-select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  /* Product Cards */
+  .card {
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Centering image */
+  .card-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+
+  .card-img-top {
+    object-fit: contain;
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .card-text {
+    text-align: center;
+  }
+
+  .card-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #007bff;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .filters-form .form-select {
+      padding: 0.75rem;
+    }
+    
+    .card-img-top {
+      height: 180px;
+    }
+  }
+</style>
+
+{% endblock %}

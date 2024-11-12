@@ -1,0 +1,12 @@
+/* Custom style for the help text in red */
+
+form .aligned p.help, form .aligned div.help {
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+    margin: 0;
+}
+
+div.help code {
+    color: red;
+}

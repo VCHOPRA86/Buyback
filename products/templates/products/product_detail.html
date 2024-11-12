@@ -1,0 +1,343 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5">
+    <h1 class="my-3">{{ product.name }}</h1>
+    <div class="row">
+       
+        <!-- Product Image and Details -->
+        <div class="col-md-4">
+           
+            <div class="card shadow-sm">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
+            </div>
+        </div>
+
+        <form id="condition-network-form" method="post" style="display: none;">
+            {% csrf_token %}
+            <input type="hidden" name="condition" id="condition-input" value="">
+           
+            <input type="hidden" name="network_status" id="network-input" value="">
+
+        </form>
+        
+        <div class="col-md-4">
+          
+            <p class="lead">{{ product.description }}</p>
+            
+         
+
+            <!-- Buttons for condition selection -->
+            <h4>Select Condition:</h4>
+            <div class="btn-group" role="group" aria-label="Product condition">
+               
+                <button type="button" class="btn btn-success" id="workingBtn" onclick="updatePrice('working')">Working</button>
+                <button type="button" class="btn btn-danger" id="faultyBtn" onclick="updatePrice('faulty')">Faulty</button>
+            </div>
+
+            <!-- Conditionally show the relevant condition description -->
+            <div id="condition-descriptions" class="mt-3">
+                <div id="working-description" style="display: block;">
+                    <p>{{ product.working_description|safe }}</p>
+                </div>
+                <div id="faulty-description" style="display: none;">
+                    <p>{{ product.faulty_description|safe }}</p>
+                </div>
+            </div>
+             <!-- Conditionally show network status selection -->
+              <h4>Select Network:</h4>
+             {% if is_network_required %}
+             <div class="network-icons mt-3" role="group" aria-label="Network status">
+                <img src="{% static 'images/network/Unlocked.png' %}" alt="Unlocked" class="network-btn" onclick="updateNetwork('unlocked')" />
+                <img src="{% static 'images/network/EE.png' %}" alt="EE" class="network-btn" onclick="updateNetwork('ee')" />
+                <!-- Add more images for other network statuses as needed -->
+            </div>
+            {% endif %}
+            
+           
+        </div>
+           <!-- Item Summary and Price -->
+<div class="col-md-4 item-summary">
+    <h2>Item Summary</h2>
+    <div class="divider"></div>
+    <p><strong>Condition:</strong> <span id="condition-display">Working</span></p>
+    {% if is_network_required %}
+    <p><strong>Network Status:</strong> <span id="network-display"></span></p>
+    {% endif %}
+    <div class="divider"></div>
+    <h3>We'll pay you: <br><span id="price-display">£{{ price }}</span></h3>
+    <a href="#" class="btn btn-primary mt-3">Sell this device </a>
+    <p class="text-muted mt-2">Unlike many other recyclers, our prices are guaranteed rather than 'up to' prices. Provided your device is received as described, you'll receive the full value. Please see our Price Promise for more details.</p>
+</div>
+    </div>
+</div>
+
+<style>
+
+    /* Item Summary and Price */
+.item-summary {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.item-summary h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.item-summary h3 {
+    font-size: 20px;
+    color: #e91e63;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.item-summary p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #555;
+}
+
+.item-summary .divider {
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 15px;
+}
+
+.item-summary strong {
+    font-weight: bold;
+    color: #333;
+}
+
+.item-summary #condition-display,
+.item-summary #network-display,
+.item-summary #price-display {
+    font-weight: 700;
+    color: #ff0000;
+}
+
+.item-summary #price-display {
+    font-size: 1.2em;
+    color: #4caf50;
+}
+
+    /* Styling for the product page */
+    .card-img-top {
+        max-width: 100%;
+        max-height: 400px;
+        object-fit: contain;
+        height: auto;
+    }
+
+    .container {
+        max-width: 1200px;
+    }
+
+    h1 {
+        color: #333;
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .lead {
+        font-size: 1.25rem;
+        color: #555;
+    }
+
+    p {
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    .btn-primary {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        width: 100%;
+    }
+
+   /* Button styling */
+.btn-group .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    margin-right: 10px;
+}
+
+    /* Styling for the network image buttons */
+    .network-icons {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 15px;
+    }
+
+    .network-btn {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+
+    /* Hover effect for network buttons */
+    .network-btn:hover {
+        transform: scale(1.1);
+    }
+
+    .requirements-list {
+            font-family: Arial, sans-serif;
+            font-size: 1.1rem;
+            color: #333;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .requirements-list li {
+            margin: 10px 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .requirements-list li i {
+            color: #28a745;
+            margin-right: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #555;
+        }
+
+        /* Remove default bullet points for this specific list */
+.no-bullets {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Optional: Style the Font Awesome icon to align better with text */
+.no-bullets li i {
+    margin-right: 8px;
+    color: green; /* Customize the color if desired */
+}
+
+.tick-icon {
+    margin-right: 5px;
+    color: green;  
+    font-size: 1em;
+    vertical-align: middle;
+}
+
+
+
+    /* Adjusting the layout on smaller screens */
+    @media (max-width: 768px) {
+        .network-icons {
+            justify-content: center;
+        }
+
+        .network-btn {
+            margin: 10px;
+            width: 50px;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<!-- Include AJAX script -->
+<script>
+    let selectedCondition = 'working';
+    let selectedNetwork = 'unlocked';
+
+    function updatePrice(condition) {
+        selectedCondition = condition;
+        document.getElementById('condition-display').textContent = condition.charAt(0).toUpperCase() + condition.slice(1);
+         // Show relevant description
+         if (condition === 'working') {
+            document.getElementById('working-description').style.display = 'block';
+            document.getElementById('faulty-description').style.display = 'none';
+        } else if (condition === 'faulty') {
+            document.getElementById('working-description').style.display = 'none';
+            document.getElementById('faulty-description').style.display = 'block';
+        }
+
+        fetchPriceUpdate();
+    }
+
+    function updateNetwork(network) {
+        selectedNetwork = network;
+        document.getElementById('network-display').textContent = network.toUpperCase();
+        fetchPriceUpdate();
+    }
+
+    function fetchPriceUpdate() {
+        fetch("{% url 'product_detail' pk=product.pk %}", {
+            method: 'POST',
+            body: JSON.stringify({
+                'condition': selectedCondition,
+                'network_status': selectedNetwork
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('price-display').textContent = `£${data.updated_price}`;
+        })
+        .catch(error => console.error('Error updating price:', error));
+    }
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Target each specific description field by ID
+        const descriptions = ['#working-description', '#faulty-description'];
+        
+        descriptions.forEach((selector) => {
+            const descriptionField = document.querySelector(selector);
+            if (descriptionField) {
+                const listItems = descriptionField.querySelectorAll('li');
+                listItems.forEach((item) => {
+                    // Create a new icon element for the tick
+                    const tickIcon = document.createElement('i');
+                    tickIcon.className = 'fa fa-check tick-icon';  // Font Awesome check icon class
+
+                    // Insert the tick icon at the beginning of each list item
+                    item.insertBefore(tickIcon, item.firstChild);
+                });
+            }
+        });
+    });
+</script>
+
+
+
+{% endblock %}

@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+<!-- Page content starts here -->
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Search Results</h1>
+        <h2>Matching handsets/gadgets found.</h2>
+
+
+        <!-- Suggestions List -->
+        <ul id="suggestions-list" class="list-group position-absolute w-50" style="display: none; z-index: 10;">
+
+        </ul>
+
+        <!-- Display Products -->
+        <div id="product-results" class="mt-4">
+            {% if products %}
+                <div class="row">
+                    {% for product in products %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <a href="{% url 'product_detail' product.id %}" class="text-decoration-none">
+                                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default-image.png' %}{% endif %}" alt="{{ product.name }}" class="product-img mx-auto d-block" width="70px">
+
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ product.name }}</h5>
+                                        <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+                                        <p class="text-primary">View Details</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-center text-muted">No products found for "{{ search_query }}"</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-input').on('input', function() {
+                var query = $(this).val();
+                if (query.length > 2) {
+                    $.ajax({
+                        url: '{% url "search_results" %}',
+                        data: { 'search': query },
+                        success: function(data) {
+                            $('#suggestions-list').empty().show();
+                            if (data.products.length > 0) {
+                                data.products.forEach(function(product) {
+                                    var productUrl = '/products/product/' + product.id + '/';
+                                    $('#suggestions-list').append('<li class="list-group-item"><a href="' + productUrl + '" class="text-decoration-none">' + product.name + '</a></li>');
+                                });
+                            } else {
+                                $('#suggestions-list').append('<li class="list-group-item text-muted">No products found</li>');
+                            }
+                        }
+                    });
+                } else {
+                    $('#suggestions-list').hide();
+                }
+            });
+
+            $('#suggestions-list').on('click', 'li a', function() {
+                $('#suggestions-list').empty().hide();
+            });
+
+            $(document).click(function(event) {
+                if (!$(event.target).closest('#search-input, #suggestions-list').length) {
+                    $('#suggestions-list').empty().hide();
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+
+         /* Custom Styles */
+         .search-container {
+            position: relative;
+        }
+
+        /* Style for Search Input */
+        #search-input {
+            border-radius: 25px; /* Rounded corners */
+            border: 1px solid #ccc; /* Light border */
+            padding: 12px 20px; /* Padding inside the input field */
+            font-size: 16px; /* Larger font size for better readability */
+            width: 50%; /* Width of the search bar */
+            transition: border 0.3s ease-in-out; /* Smooth border transition */
+        }
+
+        #search-input:focus {
+            outline: none; /* Remove default outline */
+            border-color: #007bff; /* Blue border on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle shadow on focus */
+        }
+
+        /* Suggestions List Style */
+        .suggestions-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px; /* Rounded corners for suggestion box */
+            width: 50%; /* Match width of search input */
+        }
+
+        .suggestions-list li {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .suggestions-list li:hover {
+            background-color: #f1f1f1; /* Highlight on hover */
+        }
+
+        .no-suggestions {
+            padding: 8px;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Product image styles */
+        .product-img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Card image */
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Text styles */
+        .text-primary {
+            cursor: pointer;
+        }
+        /* Custom Styles */
+        .search-container {
+            position: relative;
+        }
+
+        .suggestions-list {
+            position: absolute;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .suggestions-list li {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .suggestions-list li:hover {
+            background-color: #f1f1f1;
+        }
+
+        .no-suggestions {
+            padding: 8px;
+            color: #999;
+            font-style: italic;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .text-primary {
+            cursor: pointer;
+        }
+
+         /* Custom Styles */
+         .product-img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .text-primary {
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}

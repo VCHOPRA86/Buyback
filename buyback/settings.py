@@ -43,7 +43,36 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'home',
+    'products',
+    'ckeditor',
+    'ckeditor_uploader',  # Required for image upload functionality
 ]
+
+# CKEditor settings for image uploads
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'allowedContent': True,  # Allow all HTML content
+        'extraAllowedContent': 'i[class*="fa-"], ul[class], li[class], div[class*="fa-"]',  # Allow FontAwesome icons
+        'removePlugins': 'stylesheetparser',  # Disable the stylesheetparser plugin
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink'],
+            ['Format', 'Font', 'FontSize'],
+            ['TextColor', 'BGColor'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Image', 'Table'],
+            ['RemoveFormat', 'Source'],
+        ],
+        'extraPlugins': ','.join(['font', 'colorbutton']),
+        'filebrowserUploadUrl': '/ckeditor/upload/',  # Set upload URL
+    }
+}
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

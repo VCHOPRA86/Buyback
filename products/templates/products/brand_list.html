@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5">
+    <h1 class="my-4 text-center">Brands for {{ category.name }}</h1>
+    
+    <!-- Bootstrap Grid for the list of brands -->
+    <div class="row">
+        {% for brand in brands %}
+            <div class="col-md-4 col-lg-3 mb-4">
+                <div class="card shadow-sm">
+                    <a href="{% url 'brand_products' category.id brand.id %}">
+                        {% if brand.image %}
+                            <img src="{{ brand.image.url }}" alt="{{ brand.name }}" class="card-img-top">
+                        {% else %}
+                            <img src="{% static 'images/default-image.jpg' %}" alt="Default Image" class="card-img-top">
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* Additional styling for better visual appeal */
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-img-top {
+        width: 100%; /* Ensures the image spans the full width */
+        height: 100px; /* Fixed height for uniform image size */
+        object-fit: cover; /* Ensures images cover the area without distortion */
+    }
+
+    .card-body {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+    }
+
+    .card-title a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .card-title a:hover {
+        color: #007bff;
+    }
+
+    h1 {
+        color: #333;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+    }
+
+    .container {
+        max-width: 1200px;
+    }
+
+</style>
+
+{% endblock %}

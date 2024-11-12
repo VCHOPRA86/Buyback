@@ -4,35 +4,47 @@
 {% block content %}
 
         <!--START for model based searching-->
-  <div class="showcase">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 d-flex align-items-center">
-          <div class="block clearfix search-box">
-            <div class="introInner">
-		  	<h2>
-		  	            <br>Search for Your Device Below &		</h2>
-                    <h3>Find Out How Much It's Worth Instantly! </h3>
-                    </div>
-            <form action="#" class="search-form">
-              <div class="input-group">
-                <input type="text" name="search" id="search" class="form-control srch_list_of_model" placeholder="Enter your model" aria-label="Enter your model" aria-describedby="basic-addon1">
-                <div class="input-group-append">
-                  <button type="submit" class="input-group-text" id="basic-addon1"><img src="{{ MEDIA_URL }}search.png" alt="search"></button>
-                </div>
+        <div class="showcase">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-8 d-flex align-items-center">
+                      <div class="block clearfix search-box">
+                          <div class="introInner">
+                              <h2><br>Search for Your Device Below &</h2>
+                              <h3>Find Out How Much It's Worth Instantly!</h3>
+                          </div>
+                          <form action="{% url 'search_results' %}" method="get" class="search-form" id="search-form">
+                            <div class="input-group">
+                                <input type="text" name="search" id="search-input" class="form-control search-input" placeholder="Enter your model" aria-label="Enter your model" aria-describedby="basic-addon1">
+                                <div class="input-group-append">
+                                    <button type="submit" id="search-button" class="input-group-text btn btn-primary">
+                                        <img src="{% static 'images/search.png' %}" alt="search">
+                                    </button>
+                                </div>
+                            </div>
+                            <ul id="suggestions-list"></ul>
+                            
+                        </form>
+
+                        <span id="error-message" class="error-message"></span>
+                        
+  
+                          <!-- Display error message if search query is empty -->
+                          {% if error_message %}
+                              <div class="alert alert-danger mt-3">
+                                  {{ error_message }}
+                              </div>
+                          {% endif %}
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="block clearfix mobile-box">
+                          <img src="{% static 'images/header-mobile.png' %}" alt="Home">
+                      </div>
+                  </div>
               </div>
-            </form>
-            <p>What is my IMEI number? <i class="fa fa-question-circle"></i></p>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="block clearfix mobile-box">
-			  				<img src="{{ MEDIA_URL }}header-mobile.png" alt="Home">
-			            </div>
-        </div>
       </div>
-    </div>
-  </div>
   <!--START for model based searching-->
   
   <main>
@@ -50,7 +62,7 @@
         <div class="row">
           <div class="col-md-3">
             <div class="block clearfix step">
-              <img src="{{ MEDIA_URL }}steps/step1.png" alt="step 1">
+              <img src="{% static 'images/steps/step1.png' %}" alt="step 1">
               <div class="content">
                 <p>STEP 1</p>
                 <h4>Register Sale</h4>
@@ -59,7 +71,7 @@
           </div>
           <div class="col-md-3">
             <div class="block clearfix step">
-              <img src="{{ MEDIA_URL }}steps/step2.png" alt="step 2">
+              <img src="{% static 'images/steps/step2.png' %}" alt="step 2">
               <div class="content">
                 <p>STEP 2</p>
                 <h4>Get FREE Postage</h4>
@@ -68,7 +80,7 @@
           </div>
           <div class="col-md-3">
             <div class="block clearfix step">
-              <img src="{{ MEDIA_URL }}steps/step3.png" alt="step 3">
+              <img src="{% static 'images/steps/step3.png' %}" alt="step 3">
               <div class="content">
                 <p>STEP 3</p>
                 <h4>Post Your Device</h4>
@@ -77,7 +89,7 @@
           </div>
           <div class="col-md-3">
             <div class="block clearfix step">
-              <img src="{{ MEDIA_URL }}steps/step4.png" alt="step 4">
+              <img src="{% static 'images/steps/step4.png' %}" alt="step 4">
               <div class="content">
                 <p>STEP 4</p>
                 <h4>Get Fast Payment</h4>
@@ -88,44 +100,36 @@
       </div>
     </section>
 
-    <!---Popular devices start here-->
-    <section class="popular-devices-section popular-items-middle">
-      <div class="container">
+   <!-- Popular devices start here -->
+   <section class="popular-devices-section popular-items-middle">
+    <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="block clearfix heading h-black">
-              <h2>Popular <span>Devices</span></h2>
+            <div class="col-md-12">
+                <div class="block clearfix heading h-black">
+                    <h2>Popular <span>Devices</span></h2>
+                </div>
             </div>
-          </div>
         </div>
         <div class="swiper-container device-swiper">
-          <div class="swiper-wrapper">
-		  				  <a href="device-1" class="swiper-slide device">
-									<img src="assets/images/devices/1.png">
-								<h4>Device 1</h4>
-			  </a>
-						  <a href="device-2" class="swiper-slide device">
-									<img src="assets/images/devices/2.png">
-								<h4>Device 2</h4>
-			  </a>
-        <a href="device-3" class="swiper-slide device">
-          <img src="assets/images/devices/3.png">
-        <h4>Device 3</h4>
-</a>
+            <div class="swiper-wrapper">
+                {% for category in categories %}
+                    <a href="{% url 'category_brands' category.id %}" class="swiper-slide device">
+                        {% if category.image %}
+                            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                        {% else %}
+                            <img src="{% static 'images/default-image.jpg' %}" alt="Default Image">
+                        {% endif %}
+                        <h4>{{ category.name }}</h4>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
 
-<a href="device-4" class="swiper-slide device">
-  <img src="assets/images/devices/4.png">
-<h4>Device 4</h4>
-</a>
 
-<a href="device-5" class="swiper-slide device">
-  <img src="assets/images/devices/5.png">
-<h4>Device 5</h4>
-</a>
-</div>
-</div>
-</div>
-<!---end-->
+<!-- Popular devices end here -->
+
 
 <!---Top sellers starts here-->
       </section>
@@ -232,37 +236,80 @@
           </div>
         </div>
       </section>
-    <section class="brand-section clearfix">
-      <div class="container">
-        <div class="swiper-container brand-swiper swiper-container-horizontal">
-          <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-		  	<div class="swiper-slide swiper-slide-active" style="width: 162px; margin-right: 30px;">
-          <a href="#"><img src="assets/images/brands/brand1.png"></a>
+      <section class="brand-section clearfix">
+        <div class="container">
+          <div class="swiper-container brand-swiper swiper-container-horizontal">
+            <div class="swiper-wrapper">
+              {% for brand in brands %}
+                <div class="swiper-slide" style="width: 162px; margin-right: 30px;">
+                  <a href="{% url 'category_brands' brand.id %}" class="text-decoration-none d-block">
+                    {% if brand.image %}
+                      <img src="{{ brand.image.url }}" class="img-fluid manufacturer-image" alt="{{ brand.name }}">
+                    {% else %}
+                      <img src="{% static 'images/default-image.jpg' %}" class="img-fluid manufacturer-image" alt="Default Image">
+                    {% endif %}
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+            <!-- Swiper pagination and navigation controls -->
+            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
+            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+          </div>
         </div>
-        <div class="swiper-slide swiper-slide-next" style="width: 162px; margin-right: 30px;">
-          <a href="#"><img src="assets/images/brands/brand2.png"></a>
-        </div>
-        <div class="swiper-slide" style="width: 162px; margin-right: 30px;">
-          <a href="#"><img src="assets/images/brands/brand3.png"></a>
-        </div>
-        <div class="swiper-slide" style="width: 162px; margin-right: 30px;">
-          <a href="#"><img src="assets/images/brands/brand4.png"></a>
-        </div>
-        <div class="swiper-slide" style="width: 162px; margin-right: 30px;">
-          <a href="#"><img src="assets/images/brands/brand5.png"></a>
-        </div>       
-        <div class="swiper-slide" style="width: 162px; margin-right: 30px;">
-          <a href="#"><img src="assets/images/brands/brand6.png"></a>
-        </div>         
-        <div class="swiper-slide" style="width: 162px; margin-right: 30px;">
-          <a href="#"><img src="assets/images/brands/brand7.png"></a>
-        </div>        
-           
-        </div>
-          <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span></div>
-        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-      </div>
-    </section>
+      </section>
+      
     <!---Ends-->
-    
+
+    <style>
+      /* Add this to your styles.css file */
+      
+/* Error message styles */
+.error-message {
+  color: #ff0800;  /* Red color for error */
+  background-color: #ffffff;  /* Light red background */
+  border: 1px solid #ebccd1;  /* Red border */
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  display: none;  /* Hide by default */
+  text-align: center;
+}
+
+/* Optional: Style for the input field when there's an error */
+.search-input.error {
+  border-color: #d9534f;  /* Red border */
+  box-shadow: 0 0 5px rgba(211, 53, 79, 0.5);  /* Subtle glow effect */
+}
+
+      #suggestions-list {
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1000;
+  display: inline-block;
+  list-style-type: none;
+  padding: 0;
+}
+
+#suggestions-list li {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #998c8c;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+#suggestions-list li:hover {
+  background-color: #f0f0f0;
+}
+
+
+
+    </style>
+
+
 {% endblock%}

@@ -28,12 +28,18 @@
     
    
 
-<script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
 <script src="{% static 'js/swiper.min.js' %}"></script>
-<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/slider.js' %}"></script>
 <script src="{% static 'js/classie.js' %}"></script>
+
+<script>
+  const searchUrl = "{% url 'search_results' %}";
+</script>
+<script src="{% static 'js/search.js' %}"></script>
+
     {% endblock %}
 
     {% block extra_js %}
@@ -45,13 +51,13 @@
     font-size: 15px;">
 
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-      <a href="#" class="active">Home</a>
-      <a href="#" >Sell My Mobile</a>
-      <a href="#" >How It Works</a>
-      <a href="#" >Why Use Us?</a>
-      <a href="#" >Reviews</a>
-      <a href="#" >support</a>
-      <a href="#" >Contact Us</a>
+      <a href="{% url 'home' %}" class="active">Home</a>
+      <a href="{% url 'sell_mobile' %}" >Sell My Gadget</a>
+      <a href="{% url 'how_it_works' %}" >How It Works</a>
+      <a href="{% url 'why_use_us' %}" >Why Use Us?</a>
+      <a href="{% url 'reviews' %}" >Reviews</a>
+      <a href="{% url 'support' %}" >support</a>
+      <a href="{% url 'contact' %}" >Contact Us</a>
 
   </nav>
   <header>
@@ -59,8 +65,8 @@
 		<nav class="navbar">
 		  <div class="container">
 		  	
-						<a href="" class="logo" style="padding-bottom: 10px;">
-              <img src="{{ MEDIA_URL }}logo.png" alt="logo" style="width: 221px;">
+						<a href="{% url 'home' %}" class="logo" style="padding-bottom: 10px;">
+              <img src="{% static 'images/logo.png' %}" alt="Logo" style="width: 221px;">
 
 			</a>
 
@@ -68,39 +74,46 @@
 						<ul class="nav main-menu">
 				
 									<li class="active left">
-					  <a  class="item" href="#">
-						Home											  </a>
+                    <a class="item" href="{% url 'home' %}">
+                      Home
+                  </a>
 					</li>
 									<li class=" left">
-					  <a  class="item" href="#">
-						Sell My Mobile											  </a>
+                    <a class="item" href="{% url 'sell_mobile' %}">
+                      Sell My Gadget
+                  </a>
 					</li>
 									<li class=" left">
-					  <a  class="item" href="#">
-						How It Works											  </a>
+                    <a class="item" href="{% url 'how_it_works' %}">
+                      How It Works
+                  </a>
 					</li>
           <li class=" left">
-					  <a  class="item" href="#">
-						Why Use Us?											  </a>
+					  <a class="item" href="{% url 'why_use_us' %}">
+              Why Use Us?
+          </a>
 					</li>
           <li class=" left">
-					  <a  class="item" href="#">
-						Reviews											  </a>
+					  <a class="item" href="{% url 'reviews' %}">
+              Reviews
+          </a>
 					</li>
 
           <li class=" left">
-					  <a  class="item" href="#">
-						Support										  </a>
+            <a class="item" href="{% url 'support' %}">
+              Support
+          </a>
 					</li>
 									<li class=" left">
-					  <a  class="item" href="#">
-						Contact Us											  </a>
+                    <a class="item" href="{% url 'contact' %}">
+                      Contact Us
+                  </a>
 					</li>		
 							</ul>
 						
 			<ul class="nav icon-menu">
 			  <li class="user">
-				<a href="javascript:void()"><img src="{{ MEDIA_URL }}user_icon.png" alt="user" style="width: 25px;height: 29px;"></a>
+				<a href="javascript:void()"><img src="{% static 'images/user_icon.png' %}" alt="User Icon" style="width: 25px;height: 29px;"></a>
 				<ul class="submenu">
 				  					  <li><a href="#">Login</a></li>
 					  <li><a href="#">Signup</a></li>
@@ -109,24 +122,28 @@
 			  <li>
       
         <a class="site-pop-search" href="#">
-          <img src="{{ MEDIA_URL }}search_icon.png" alt="search" style="width: 28px;">    
+          <img src="{% static 'images/search_icon.png' %}" alt="Search Icon" style="width: 28px;">    
         </a>
 			  </li>
 			  <li>
-				<a href="#" class="cart"><img src="{{ MEDIA_URL }}cart_icon.png" alt="cart" style="width: 30px;height: 27px;"><span></span></a>
+				<a href="#" class="cart"><img src="{% static 'images/cart_icon.png' %}" alt="Cart Icon" style="width: 30px;height: 27px;"><span></span></a>
 			  </li>
 			  <li class="toggle-btn">
 				<button id="showRightPush"><i class="fa fa-bars"></i></button>
 			  </li>
       </ul>
-      <form action="#" method="post" class="search-form search-form-top">
+      <form action="{% url 'search_results' %}" method="get" class="search-form2 search-form-top" id="search-form2">
         <div class="input-group">
-          <input name="search" id="search" class="form-control" placeholder="Enter your model" autocomplete="off" type="text">
-          <div class="input-group-append">
-            <button type="submit" class="input-group-text" id="basic-addon1"><img src="{{ MEDIA_URL }}search.png" alt="search"></button>
-          </div>
+            <input name="search" id="search-input2" class="form-control" placeholder="Enter your model" autocomplete="off" type="text">
+            <div class="input-group-append">
+                <button type="submit" class="input-group-text btn btn-primary" id="search-button2">
+                    <img src="{% static 'images/search.png' %}" alt="search">
+                </button>
+            </div>
         </div>
-      </form>
+        <ul id="suggestions-list2"></ul>
+        <span id="error-message2" class="error-message2"></span>
+    </form>
 		  </div>
 		</nav>
 	</header>
@@ -150,7 +167,7 @@
           <div class="row">
             <div class="col-md-3">
               <div class="block clearfix">
-               <img src="{{ MEDIA_URL }}logo.png" alt="logo" style="width: 220px;">
+                <img src="{% static 'images/logo.png' %}" alt="logo" style="width: 220px;">
               </div>
               <div class="block clearfix social d-flex" style="height: 50px;">
                 <ul style="list-style: none; display: flex; gap: 15px; padding: 0; margin: 0;">
@@ -208,7 +225,7 @@
                 <ul>
                         <li><a href="#">Terms & Conditions</a> </li>
                             <li>
-                    <a href="https://www.checkmend.com/uk/"><img src="{{ MEDIA_URL }}checkmend-logo.png" alt="checkmend logo" width="127"></a>
+                    <a href="https://www.checkmend.com/uk/"><img src="{% static 'images/checkmend-logo.png' %}" alt="checkmend logo" width="127"></a>
                   </li>
                 </ul>
               </div>
@@ -228,7 +245,59 @@
         </div>
       </div>
     </footer>
-  
+  <style>
+
+    /* Error message styles */
+.error-message2 {
+  color: #ff0800;  /* Red color for error */
+  background-color: #ffffff;  /* Light red background */
+  border: 1px solid #ebccd1;  /* Red border */
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  display: none;  /* Hide by default */
+  text-align: center;
+}
+
+#suggestions-list2 {
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1000;
+  display: inline-block;
+  list-style-type: none;
+  padding: 0;
+}
+
+#suggestions-list2 li {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #998c8c;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+#suggestions-list2 li:hover {
+  background-color: #f0f0f0;
+}
+
+#suggestions-list2 a {
+    /* Add your styles here */
+    color: #333;  /* Example: Change text color */
+    text-decoration: none;  /* Example: Remove underline */
+    padding: 5px;  /* Example: Add padding */
+}
+
+#suggestions-list2 a:hover {
+    /* Add hover styles */
+    color: #007bff;  /* Example: Change color on hover */
+    background-color: #f0f0f0;  /* Example: Change background on hover */
+}
+
+  </style>
   
 
     

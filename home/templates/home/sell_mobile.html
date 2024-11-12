@@ -1,0 +1,119 @@
+{% extends "base.html "%}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* Center the images inside the wrapper */
+.category-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px; /* Set a fixed height for better layout control */
+}
+
+/* Style the images */
+.category-image {
+    max-width: 93px;
+    max-height: 108px;
+    object-fit: contain; /* Ensures the image retains its aspect ratio */
+}
+
+/* Container settings */
+#manufacturers {
+    padding-bottom: 0 !important;
+    min-height: 265px;
+}
+
+/* Tile settings */
+.manufacturer-tile {
+    background-color: #d70062;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.manufacturer-tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Image styling */
+.manufacturer-image {
+    max-width: 160px;
+    max-height: 93px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    background: #ffffff;
+}
+
+/* Title styling */
+.manufacturer-name {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: bold;
+}
+
+
+
+</style>
+<section class="sell-mobile-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Sell Your Gadget</h2>
+        
+        <!-- Categories Section -->
+        <div class="categories">
+            <h3 class="text-center mb-4">Choose a Category</h3>
+            <div class="row">
+                {% for category in categories %}
+                    <div class="col-md-4 col-lg-3 mb-4">
+                        <div class="card h-100">
+                            <a href="{% url 'category_products' category.id %}" class="text-decoration-none text-dark">
+                                <div class="category-image-wrapper">
+                                    {% if category.image %}
+                                        <img src="{{ category.image.url }}" class="category-image" alt="{{ category.name }}">
+                                    {% else %}
+                                        <img src="{% static 'images/default-image.png' %}" class="category-image" alt="Default Image">
+                                    {% endif %}
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ category.name }}</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="sell-my-mobile-section">
+    <div class="container" id="manufacturers" style="min-height: 265px;">
+        <h3 class="text-center mb-4">Search by manufacturers</h3>
+
+        <div class="row manufacturers-grid">
+            {% for brand in brands %}
+                <div class="col-6 col-md-3 mb-3">
+                    <div class="manufacturer-tile text-center">
+                        <a href="{% url 'category_brands' category_id=brand.category_id %}" class="text-decoration-none d-block">
+                    
+                            {% if brand.image %}
+                                <img src="{{ brand.image.url }}" class="img-fluid manufacturer-image" alt="{{ brand.name }}">
+                            {% else %}
+                                <img src="{% static 'images/default-image.jpg' %}" class="img-fluid manufacturer-image" alt="Default Image">
+                            {% endif %}
+                            
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+        
+
+    
+{% endblock%}
