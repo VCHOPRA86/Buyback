@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="review-sale-container">
+    <h1>Review Your Sale</h1>
+    <p>Please click on the Complete Sale button to complete the sale.</p>
+
+    <div class="sale-details">
+        <h2>Your Sale Details:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Remove</th>
+                    <th>Gadget Type</th>
+                    <th>Condition</th>
+                    <th>IMEI</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                    <td><button class="remove-btn"><i class="fa fa-trash"></i></button></td>
+                    <td>{{ item.device_name }}</td>
+                    <td>{{ item.condition }}</td>
+                    <td>--</td>
+                    <td>£520.00</td>
+                </tr>
+            
+            </tbody>
+        </table>
+        <div class="total">
+            <span>SELL ORDER TOTAL:</span>
+            <span>£520.00</span>
+        </div>
+    </div>
+
+    <div class="payment-method">
+        <h2>Your preferred payment method: (tick to change)</h2>
+        <div class="payment-options">
+           
+            <div class="payment-option selected">
+                
+                
+                <h3>Bank Transfer</h3>
+                <img src="{% static 'images/payments/bank-transfer.png'%}" alt="">
+                <p>We will send a bank transfer to your bank account.</p>
+                <span>£520.00</span>
+            </div>
+            <div class="payment-option">
+                
+               
+               
+                <h3>PayPal</h3>
+                <img src="{% static 'images/payments/paypal.png'%}" alt="">
+                <p>We will send payment by paypal to your paypal email address.</p>
+                <p></p>
+                <span>£520.00</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="coupon-section">
+        <input type="text" placeholder="COUPON CODE">
+        <button class="apply-btn">APPLY</button>
+    </div>
+
+    <div class="final-summary">
+        <span>Total Sale Value:</span>
+        <span>£520.00</span>
+    </div>
+
+    <div class="action-buttons">
+        <button class="back-btn">BACK</button>
+        <button class="complete-sale-btn">COMPLETE SALE</button>
+    </div>
+</div>
+
+<style>
+
+.review-sale-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #ff0080;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.sale-details {
+    margin-bottom: 20px;
+}
+
+.sale-details h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+thead th {
+    background: #f4f4f4;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: red;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    background: #ff0080;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.payment-method h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.payment-options {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.payment-option {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.payment-option.selected {
+    border: 2px solid #ff0080;
+}
+
+.coupon-section {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.coupon-section input {
+    width: 35%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.apply-btn {
+    background: #ff0080;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.final-summary {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.back-btn,
+.complete-sale-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.back-btn {
+    background: #f4f4f4;
+    color: #333;
+}
+
+.complete-sale-btn {
+    background: #ff0080;
+    color: white;
+}
+
+</style>
+
+
+
+{% endblock %}

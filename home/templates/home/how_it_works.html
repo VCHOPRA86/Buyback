@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="how-it-works-section py-5">
+    <div class="container text-center">
+        <h1>How It Works</h1>
+        <p class="lead">Follow these simple steps to get started.</p>
+    </div>
+    
+    <div class="container">
+        <div class="content-box">
+            <img src="{% static 'images/how-it-works/icon-register-sale.png' %}" alt="Register Sale">
+            <div class="text-content">
+                <h2>Register Sale</h2>
+                <h3>Takes less than 5 mins to complete</h3>
+                <p>Simply search for your old gadget to see how much it's worth. Choose one of our great payment methods, enter your details, and job done!</p>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <img src="{% static 'images/how-it-works/icon-sales-pack-options.png' %}" alt="Sales Pack Options">
+            <div class="text-content">
+                <h2>Post for free</h2>
+                <h3>Print Your Own Label</h3>
+                <p>Once you've placed an order, print your own free post label.</p>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <img src="{% static 'images/how-it-works/icon-send-device.png' %}" alt="Send Device">
+            <div class="text-content">
+                <h2>Send Gadget</h2>
+                <h3>Post us your device within 14 days</h3>
+                <p>Send your device through the post office using the printed label.</p>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <img src="{% static 'images/how-it-works/icon-fast-payment.png' %}" alt="Fast Payment">
+            <div class="text-content">
+                <h2>Fast Payment</h2>
+                <h3>Same day we receive your gadget*</h3>
+                <p>We make payment on the same day of receipt after checking your order. You smile, we smile.</p>
+                <p class="small">*Same day payment applies on weekdays before 2 pm.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* General Styles */
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* How It Works Section */
+.how-it-works-section h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.how-it-works-section .lead {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* Content Box */
+.how-it-works-section .content-box {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    border-radius: 50%;
+}
+
+.how-it-works-section .content-box img {
+    width: 100px;
+    height: 100px;
+    border-radius: 27%;
+    background-color: #ff0074;
+    padding: 14px;
+}
+
+.how-it-works-section .text-content {
+    text-align: left;
+    margin-left: 37px;
+}
+
+.how-it-works-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.how-it-works-section h3 {
+    font-size: 1.2rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.how-it-works-section p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.how-it-works-section .small {
+    font-size: 0.9rem;
+    color: #777;
+}
+</style>
+{% endblock %}

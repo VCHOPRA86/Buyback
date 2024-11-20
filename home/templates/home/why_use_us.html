@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="why-choose-us-section">
+    <div class="container text-center">
+        <h1>Why Use Us?</h1>
+        <p class="lead">Reasons to use us.</p>
+    </div>
+    
+    <div class="container">
+        <div class="content-box">
+            <img src="{% static 'images/why-use-us/price-promise.png' %}" alt="Price promise">
+            <h2>The price you see, is the price you get. Guaranteed.</h2>
+            <p>We promise to pay you 100% of the value quoted or your phone back FREE of charge. No nasty inflated ‘up to’ prices to tempt you in and leave you disappointed.</p>
+        </div>
+
+        <div class="content-box">
+            <img src="{% static 'images/why-use-us/fast-payment.png' %}" alt="Icon 2">
+            <h2>Our fast payment really is the fastest.</h2>
+            <p>You want your money. You want it fast. So we promise to send your payment on the same day* we receive your device! Our FPS bank transfers clear in your account on the same day. No slow BACS payments which take 3 working days.</p>
+        </div>
+
+        <div class="content-box">
+            <img src="{% static 'images/why-use-us/fixed-prices.png' %}" alt="Icon 3">
+            <h2>Fixed prices for both working and faulty.</h2>
+            <p>We promise to pay you 100% of the value quoted or your phone back FREE of charge. No nasty inflated ‘up to’ prices to tempt you in and leave you disappointed.</p>
+        </div>
+
+        <div class="content-box">
+            <img src="{% static 'images/why-use-us/no-fees.png' %}" alt="Icon 10">
+            <h2>No seller fees that eat into the cash you receive.</h2>
+            <p>The price we quote is the price you receive in your pocket. No seller fees or hidden costs that eat into the amount you get.</p>
+        </div>
+
+        <div class="content-box">
+            <img src="{% static 'images/why-use-us/free-postage.png' %}" alt="Icon 10">
+            <h2>Free postage which includes tracking.</h2>
+            <p>Our freepost service includes free delivery, up to £150 loss and damage cover and free tracking via royalmail.com. We'll also email you once your device is received to let you know it's arrived safely.</p>
+        </div>
+
+        <div class="content-box">
+            <img src="{% static 'images/why-use-us/enviro.png' %}" alt="Icon 10">
+            <h2>Help others and the enviroment whilst helping yourself.</h2>
+            <p>We follow sustainable recycling practices and extends the life old gadgets, so someone else gets an affordable working gadget either in the UK or a developing country. The impact on planet earth is minimised, and (best of all) you get paid for doing something good!</p>
+        </div>
+
+
+  
+    </div>
+</section>
+
+<style>
+
+    .why-choose-us-section {
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+
+.content-box {
+    padding: 20px;
+    border-bottom: 1px solid #eaeaea;
+    text-align: center;
+}
+
+.content-box img {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 20px;
+}
+
+.content-box h2 {
+    font-size: 1.5rem;
+    color: #ff0074;
+    margin-bottom: 10px;
+}
+
+.content-box p {
+    font-size: 1rem;
+    color: #777;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Remove bottom border from the last content-box */
+.content-box:last-child {
+    border-bottom: none;
+}
+</style>
+{% endblock %}

@@ -28,8 +28,11 @@ def reviews(request):
 def support(request):
     return render(request, 'home/support.html')
 
-def contact(request):
-    return render(request, 'home/contact.html')
+def signup(request):
+    return render(request, 'home/signup.html')
+
+def login(request):
+    return render(request, 'home/login.html')
 
 
 def autocomplete_products(request):

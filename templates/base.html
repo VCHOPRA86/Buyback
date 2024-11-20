@@ -51,11 +51,11 @@
     font-size: 15px;">
 
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+      <button class="close-menu">X</button>
       <a href="{% url 'home' %}" class="active">Home</a>
       <a href="{% url 'sell_mobile' %}" >Sell My Gadget</a>
       <a href="{% url 'how_it_works' %}" >How It Works</a>
       <a href="{% url 'why_use_us' %}" >Why Use Us?</a>
-      <a href="{% url 'reviews' %}" >Reviews</a>
       <a href="{% url 'support' %}" >support</a>
       <a href="{% url 'contact' %}" >Contact Us</a>
 
@@ -93,11 +93,6 @@
               Why Use Us?
           </a>
 					</li>
-          <li class=" left">
-					  <a class="item" href="{% url 'reviews' %}">
-              Reviews
-          </a>
-					</li>
 
           <li class=" left">
             <a class="item" href="{% url 'support' %}">
@@ -115,8 +110,8 @@
 			  <li class="user">
 				<a href="javascript:void()"><img src="{% static 'images/user_icon.png' %}" alt="User Icon" style="width: 25px;height: 29px;"></a>
 				<ul class="submenu">
-				  					  <li><a href="#">Login</a></li>
-					  <li><a href="#">Signup</a></li>
+				  					  <li><a href="{% url 'login' %}">Login</a></li>
+					  <li><a href="{% url 'signup' %}">Signup</a></li>
 				  				</ul>
 			  </li>
 			  <li>
@@ -126,7 +121,7 @@
         </a>
 			  </li>
 			  <li>
-				<a href="#" class="cart"><img src="{% static 'images/cart_icon.png' %}" alt="Cart Icon" style="width: 30px;height: 27px;"><span></span></a>
+				<a href="{% url 'revieworder' %}" class="cart"><img src="{% static 'images/cart_icon.png' %}" alt="Cart Icon" style="width: 30px;height: 27px;"><span></span></a>
 			  </li>
 			  <li class="toggle-btn">
 				<button id="showRightPush"><i class="fa fa-bars"></i></button>
@@ -215,7 +210,6 @@
                 <h3>SUPPORT</h3>
                 <ul>
                   <li ><a href="#">Contact Us</a></li>
-                  <li ><a href="#">Affiliates</a></li>
                     </ul>
               </div>
             </div>
@@ -298,6 +292,8 @@
 }
 
   </style>
+
+
   
 
     

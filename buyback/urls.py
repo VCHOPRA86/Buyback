@@ -23,7 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
-    path('products/category/', include('products.urls')),  # Example path
+    path('contact/', include('contact.urls')),
+    path('category/', include('products.urls')),  # Example path
     path('ckeditor/', include('ckeditor_uploader.urls')),  # Include CKEditor URLs
-    path('products/', include('products.urls')),  # Include product URLs for buyback
+    path('', include('products.urls')),  # Include product URLs for buyback
+    path('', include('revieworder.urls')),  # Include product URLs for buyback
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

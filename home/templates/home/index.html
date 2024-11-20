@@ -55,7 +55,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="block clearfix heading h-black">
-              <h2>Sell your mobile in <span>4 simple steps</span></h2>
+              <h2>Sell your gadget in <span>4 simple steps</span></h2>
             </div>
           </div>
         </div>
@@ -242,7 +242,7 @@
             <div class="swiper-wrapper">
               {% for brand in brands %}
                 <div class="swiper-slide" style="width: 162px; margin-right: 30px;">
-                  <a href="{% url 'category_brands' brand.id %}" class="text-decoration-none d-block">
+                  <a href="{% url 'category_brands' category_id=brand.category_id %}" class="text-decoration-none d-block">
                     {% if brand.image %}
                       <img src="{{ brand.image.url }}" class="img-fluid manufacturer-image" alt="{{ brand.name }}">
                     {% else %}

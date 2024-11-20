@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+ <!-- Display messages (success, error, etc.) -->
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+        <div class="message message-{{ message.tags }}">
+            <span class="message-icon">
+                {% if message.tags == 'success' %}
+                    <i class="fas fa-check-circle"></i> <!-- Example icon -->
+                {% elif message.tags == 'error' %}
+                    <i class="fas fa-times-circle"></i> <!-- Example icon -->
+                {% elif message.tags == 'info' %}
+                    <i class="fas fa-info-circle"></i> <!-- Example icon -->
+                {% elif message.tags == 'warning' %}
+                    <i class="fas fa-exclamation-circle"></i> <!-- Example icon -->
+                {% endif %}
+            </span>
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+
+<div class="contact-container">
+    <div class="contact-header">
+        <div class="icon-circle">
+            <img src="{% static 'images/contact/write-icon.png' %}" alt="Write Icon">
+        </div>
+        <h2>Write Us</h2>
+        <p>To contact us via email, please complete our online contact form. Required fields are marked with *</p>
+        <p>We aim to reply to all email enquiries within 2 hours (our working hours of <strong>9am-6pm, Mon-Fri</strong>).</p>
+    </div>
+
+    <form class="contact-form" method="post" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <div class="form-row">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="company" placeholder="Company">
+        </div>
+        <div class="form-row">
+            <input type="text" name="order_no" placeholder="Order No">
+            <input type="text" name="phone" placeholder="Phone" required>
+            <textarea name="message" placeholder="Message" required></textarea>
+        </div>
+        <button type="submit" class="submit-button">Send Inquiry</button>
+    </form>
+
+    <div class="contact-details">
+        <div class="contact-item">
+            <div class="icon-circle">
+                <img src="{% static 'images/contact/phone-icon.png' %}" alt="Phone Icon">
+            </div>
+            <h4>Telephone</h4>
+            <p>0800 123 1234</p>
+        </div>
+        <div class="contact-item">
+            <div class="icon-circle">
+                <img src="{% static 'images/contact/email-icon.png' %}" alt="Email Icon">
+            </div>
+            <h4>Email</h4>
+            <p>help@cashthatgadget.com</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .contact-container {
+    max-width: 1000px;
+    margin: 16px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.icon-circle {
+    background-color: #f6c6d5;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.icon-circle img {
+    width: 30px;
+    height: 30px;
+}
+
+.contact-header h2 {
+    font-size: 24px;
+    color: #e91e63;
+    margin: 0;
+}
+
+.contact-header p {
+    color: #555;
+}
+
+.contact-form {
+    margin-top: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.form-row input,
+.form-row textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+textarea {
+    height: 60px;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #444;
+}
+
+.contact-details {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.contact-item {
+    text-align: center;
+}
+
+.contact-item h4 {
+    font-size: 16px;
+    color: #e91e63;
+    margin: 10px 0 5px;
+}
+
+.contact-item p {
+    color: #555;
+}
+
+/* Styling for messages */
+.messages {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    width: 100%;
+}
+
+.message {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+}
+
+.message-icon {
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.message-success {
+    background-color: #28a745;
+    color: #fff;
+    border-left: 5px solid #218838;
+}
+
+.message-error {
+    background-color: #dc3545;
+    color: #fff;
+    border-left: 5px solid #c82333;
+}
+
+.message-info {
+    background-color: #17a2b8;
+    color: #fff;
+    border-left: 5px solid #138496;
+}
+
+.message-warning {
+    background-color: #ffc107;
+    color: #fff;
+    border-left: 5px solid #e0a800;
+}
+
+/* Optional: Add a hover effect to messages for interactivity */
+.message:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+</style>
+
+{% endblock %}

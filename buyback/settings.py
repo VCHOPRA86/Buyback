@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'products',
     'ckeditor',
     'ckeditor_uploader',  # Required for image upload functionality
+    'contact',
+    'revieworder',
 ]
 
 # CKEditor settings for image uploads

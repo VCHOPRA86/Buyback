@@ -17,7 +17,7 @@ class Brand(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='brands/', null=True, blank=True)
     description = models.TextField(blank=True, null=True)  
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -37,8 +37,8 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, related_name="products", on_delete=models.CASCADE)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
-    working_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, null=True, blank=True)
-    faulty_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, null=True, blank=True)
+    working_price = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'), null=True, blank=True)
+    faulty_price = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'), null=True, blank=True)
 
     # New fields for specific descriptions
     working_description = RichTextField(blank=True, null=True, help_text='Description for working condition - Use <code>class="no-bullets"</code> in your <ul> tags to remove bullet points')

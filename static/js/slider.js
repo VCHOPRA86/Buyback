@@ -102,14 +102,23 @@ jQuery.noConflict();
     // slide and push menu
     var menuRight = document.getElementById('cbp-spmenu-s2'),
       showRightPush = document.getElementById('showRightPush'),
+      closeMenuButton = document.querySelector('.close-menu'),
       body = document.body;
 
-    showRightPush.onclick = function () {
-      classie.toggle(this, 'active');
-      classie.toggle(body, 'cbp-spmenu-push-toleft');
-      classie.toggle(menuRight, 'cbp-spmenu-open');
-      disableOther('showRightPush');
-    };
+   // Open the menu when the "showRightPush" button is clicked
+showRightPush.onclick = function () {
+  classie.toggle(this, 'active');
+  classie.toggle(body, 'cbp-spmenu-push-toleft');
+  classie.toggle(menuRight, 'cbp-spmenu-open');
+  disableOther('showRightPush');
+};
+
+    // Close the menu when the "X" button is clicked
+closeMenuButton.onclick = function () {
+  classie.remove(body, 'cbp-spmenu-push-toleft');
+  classie.remove(menuRight, 'cbp-spmenu-open');
+  classie.remove(showRightPush, 'active'); // Ensure the "showRightPush" button reflects the closed state
+};
 
     function disableOther(button) {
       if (button !== 'showRightPush') {

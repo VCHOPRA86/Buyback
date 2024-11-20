@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="contain">
+    <div class="row gy-4">
+        <!-- Form Section -->
+        <div class="col-lg-8 col-md-12 col-12 bg-dark text-white p-4 rounded">
+            <h1 class="text-center mb-4">Register a New Account</h1>
+            <form>
+                <!-- Personal Details -->
+                <fieldset class="mb-4">
+                    <legend>Personal Details</legend>
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-12">
+                            <input type="text" class="form-control" placeholder="First Name" required>
+                        </div>
+                         <!-- Last Name -->
+        <div class="col-md-6 col-12 mt-3 mt-md-0">
+            <input type="text" class="form-control" placeholder="Last Name" required>
+        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-12">
+                            <input type="text" class="form-control" placeholder="Contact Number" required>
+                        </div>
+
+                        <div class="col-md-6 col-12 mt-3 mt-md-0">
+                            <input type="email" class="form-control" placeholder="Email Address" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-12">
+                            <input type="text" class="form-control" placeholder="Address" required>
+                        </div>
+                        <div class="col-md-6 col-12 mt-3 mt-md-0">
+                            <input type="text" class="form-control" placeholder="Address Line 2">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-12">
+                            <input type="text" class="form-control" placeholder="City or Town" required>
+                        </div>
+                        <div class="col-md-6 col-12 mt-3 mt-md-0">
+                            <input type="text" class="form-control" placeholder="County" required>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control mb-3" placeholder="Post Code" required>
+                </fieldset>
+
+                <!-- Company Details -->
+                <fieldset class="mb-4">
+                    <legend>Company Details (Business Use Only)</legend>
+                    <input type="text" class="form-control mb-3" placeholder="Company Name (Business Only)">
+                </fieldset>
+
+                <!-- Login Details -->
+                <fieldset class="mb-4">
+                    <legend>Login Details</legend>
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-12">
+                            <input type="text" class="form-control" placeholder="Username" required>
+                        </div>
+            
+                
+                        <div class="col-md-6 col-12 mt-3 mt-md-0">
+                            <input type="password" class="form-control" placeholder="Password" required>
+                        </div>
+                 </div>
+                 <div class="row mb-3">
+                 <div class="col-md-6 col-12">
+                    <input type="password" class="form-control" placeholder="Confirm Password" required>
+                </div>
+                </div>
+                    
+                
+                </fieldset>
+
+                <!-- Terms and Submit -->
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="terms" required>
+                    <label class="form-check-label" for="terms">
+                        I agree to the <a href="#" class="text-warning">Terms of Website Use and Privacy Policy</a>.
+                    </label>
+                </div>
+                <button type="submit" class="button">Create My Account</button>
+            </form>
+        </div>
+
+        <!-- Help Section -->
+        <div class="col-lg-4 col-md-12 col-12 help-section py-5">
+            <p class="h5">Need help? Call us</p>
+            <p class="h2 fw-bold">0800 123 1234</p>
+        </div>
+    </div>
+    </div>
+
+  
+
+<style>
+
+
+.form-section {
+  flex: 3;
+  padding: 20px;
+  background-color: #333;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+  color: #ffffff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+legend {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.form-group {
+  display: flex;
+  gap: 10px;
+}
+
+input, select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+input[type="checkbox"] {
+  flex: 0;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #ffffff;
+}
+
+button {
+  background-color: #ff0066;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 30%;
+}
+
+button:hover {
+  background-color: #e6005c;
+}
+
+.help-section {
+  flex: 1;
+  background-color: #ff0066;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.phone-number {
+  font-size: 18px;
+  font-weight: bold;
+}
+</style>
+
+{% endblock %}
+

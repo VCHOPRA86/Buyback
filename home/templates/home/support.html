@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="support-page">
+    <h1>Support & FAQs</h1>
+    <p>If you have any questions, check our FAQs below. You may find the answer you need!</p>
+    
+    <div class="accordion">
+        <div class="accordion-item">
+            <button class="accordion-button">What sort of devices can I sell?</button>
+            <div class="accordion-content">
+                <p>We’ll accept both Working and Faulty devices listed in our pricing guide. For the full story, please take a peek at our Terms & Conditions.</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button">How do I track my order?</button>
+            <div class="accordion-content">
+                <p>You can track your order using the tracking number sent to your email upon dispatch. Visit your my account order page.</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button">Do I need to send the charger or accessories?</button>
+            <div class="accordion-content">
+                <p>If you’re sending in a smartwatch, laptop or console then ideally yes, otherwise we just need the handset with its battery.
+
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button">What payment methods do you offer?</button>
+            <div class="accordion-content">
+                <p>We currently offer a choice of two payment methods – Bank Transfer or PayPal.</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button">How do I reset my password?</button>
+            <div class="accordion-content">
+                <p>To reset your password, click on 'Forgot Password' on the login page and follow the instructions. You’ll receive an email with a link to reset your password.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+
+.support-page {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.support-page h1 {
+    font-size: 2rem;
+    color: #ff0074;
+    margin-bottom: 10px;
+}
+
+.support-page p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.accordion {
+    border-top: 1px solid #ddd;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #ddd;
+}
+
+.accordion-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    color: #333;
+    text-align: left;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.accordion-button:hover {
+    background-color: #f9f9f9;
+}
+
+.accordion-button::after {
+    content: '\002B';
+    font-size: 1.5rem;
+    float: right;
+    color: #ff0074;
+    transition: transform 0.3s ease;
+}
+
+.accordion-button.active::after {
+    transform: rotate(45deg);
+}
+
+.accordion-content {
+    display: none;
+    padding: 0 15px 15px;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+}
+</style>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const accordionButtons = document.querySelectorAll('.accordion-button');
+
+    accordionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const content = button.nextElementSibling;
+            button.classList.toggle('active');
+            
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    });
+});
+
+</script>
+{% endblock %}
