@@ -1,0 +1,91 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Account Inactive" %}{% endblock %}
+
+{% block content %}
+<div class="inactive-account-container">
+    <div class="inactive-account-card">
+        <h1 class="inactive-heading">{% trans "Account Inactive" %}</h1>
+        <p class="inactive-message">
+            {% trans "Your account is currently inactive. Please contact support for further assistance, or check your email for instructions on how to reactivate your account." %}
+        </p>
+        
+        <div class="inactive-actions">
+            <a href="{% url 'support' %}" class="btn btn-primary">{% trans "Contact Support" %}</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">{% trans "Go to Home" %}</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .inactive-account-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60vh;
+        background-color: #f8f9fa;
+    }
+
+    .inactive-account-card {
+        background-color: #ffffff;
+        padding: 2rem 3rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .inactive-heading {
+        font-size: 2rem;
+        color: #343a40;
+        margin-bottom: 1rem;
+    }
+
+    .inactive-message {
+        font-size: 1.2rem;
+        color: #6c757d;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    .inactive-actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        transition: background-color 0.3s;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+</style>
+{% endblock %}
