@@ -13,19 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.contrib import admin
+from django.urls import path, include
+import debug_toolbar
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    path('', include('home.urls')),
-    path('contact/', include('contact.urls')),
-    path('category/', include('products.urls')),  # Example path
-    path('ckeditor/', include('ckeditor_uploader.urls')),  # Include CKEditor URLs
-    path('', include('products.urls')),  # Include product URLs for buyback
-    path('', include('revieworder.urls')),  # Include product URLs for buyback
+    path('admin/', admin.site.urls),  # Admin site
+    path('accounts/', include('allauth.urls')),  # Django Allauth URLs
+    path('contact/', include('contact.urls')),  # Contact app URLs
+    path('', include('products.urls')),  # Product categories
+    path('ckeditor/', include('ckeditor_uploader.urls')),  # CKEditor integration
+    path('revieworder/', include('revieworder.urls')),  # Review order URLs
+    path('checkout/', include('checkout.urls', namespace='checkout')),  # Checkout process URLs
+    path('profile/', include('profiles.urls')),  # User profiles URLs
+    path('__debug__/', include(debug_toolbar.urls)),  # Debug toolbar
+    path('', include('home.urls')),  # Home app catch-all
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

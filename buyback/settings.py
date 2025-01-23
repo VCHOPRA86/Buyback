@@ -10,6 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import environ
+
+# Initialize environment variables
+env = environ.Env()
+environ.Env.read_env()  # This reads the .env file
+
+
 
 from pathlib import Path
 
@@ -26,12 +33,14 @@ SECRET_KEY = 'django-insecure-cf*&g7@zb1cv(j_-(1%j658b*_+%!j!mh1419!n#b)6h7z-**=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',  
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,13 +51,28 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
+    'crispy_bootstrap4',
     'home',
     'products',
     'ckeditor',
     'ckeditor_uploader',  # Required for image upload functionality
     'contact',
     'revieworder',
+    'checkout',
+    'profiles',
+    'debug_toolbar',
+    'settings',
+    'email_templates',
+    'environ',
+    
+
 ]
+
+
+# Specify the template pack
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # CKEditor settings for image uploads
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -73,6 +97,26 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
 
 
 
@@ -84,7 +128,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'settings.middleware.SettingsMiddleware',
+    # other middleware
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+INTERNAL_IPS = ['127.0.0.1']
 
 ROOT_URLCONF = 'buyback.urls'
 
@@ -102,10 +151,53 @@ TEMPLATES = [
                 'django.template.context_processors.request', # required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'revieworder.context_processors.cart_total_quantity',
             ],
         },
     },
 ]
+
+
+JAZZMIN_SETTINGS = {
+
+    "debug": True,
+    "site_title": "My Admin",  # The title in the browser tab
+    "site_header": "My Admin Dashboard",  # The header that appears at the top of the page
+    "site_brand": "Welcome Admin",  # The brand name or logo in the top left corner
+    "site_icon": "https://path-to-your-logo.png",  # Optional: URL to your site icon
+    "welcome_sign": "Welcome to the Admin Dashboard",  # Optional: Custom welcome message
+    
+    # Custom Top Menu links
+    "topmenu_links": [
+        {"name": "Home", "url": "/", "permissions": ["auth.view_user"]},
+        
+    ],
+    
+    # Custom User Avatar (Optional)
+    "user_avatar": "",  # Optional: URL to your avatar image
+    
+    # Change Sidebar Settings
+    "sidebar_background_color": "#1a1a1a",  # Background color of the sidebar (default is dark)
+    "sidebar_text_color": "#fff",  # Text color of the sidebar (default is white)
+    
+    # Adjust the admin UI tweaks
+    "theme": "dark",  # Options: 'light', 'blue', 'green', 'dark'
+    "navbar": "default",  # Navbar position (you can try 'fixed', 'static')
+    
+    # Customize the appearance of the admin
+    "show_ui_builder": True,  # Show the UI builder option in the admin panel for customization
+    "use_navbar_search": True,  # Enable the navbar search functionality
+    "hide_apps": ["auth", "admin"],  # Hide default apps from sidebar
+
+    "custom_css": "css/admin/admin.css",  # Path to your custom CSS file
+
+}
+
+
+
+
+
+
 
 AUTHENTICATION_BACKENDS = (
 
@@ -114,19 +206,46 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+
 SITE_ID = 1
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = "smtp.gmail.com"  # Use your email provider's SMTP server
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'buymygadgets@gmail.com'  
+EMAIL_HOST_PASSWORD = 'fisxqrffcbbzzrdq'
+
+DEFAULT_FROM_EMAIL = "EMAIL_HOST_USER"
+ADMIN_EMAIL = "vikas.chopra@hotmail.co.uk"  # Set this to the admin's
+
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
-ACCOUNT_USERNAME_MIN_LENGTH = 4
+ACCOUNT_USERNAME_MIN_LENGTH = 5
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+ACCOUNT_SIGNUP_REDIRECT_URL = '/profiles/'
+LOGIN_REDIRECT_URL = '/profile/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+
+
+SHIPENGINE_API_KEY = 'TEST_g3XcGUa7H190dWqdPQjIQyxu4w44TlxJfqjpuy8Tye8'
+
+
+APPEND_SLASH = True
+
 
 WSGI_APPLICATION = 'buyback.wsgi.application'
+
+
+
+
+
 
 
 # Database
@@ -186,3 +305,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ACCOUNT_FORMS = {
+    'signup': 'profiles.forms.CustomSignupForm',  # Update the path as per your app structure
+}
