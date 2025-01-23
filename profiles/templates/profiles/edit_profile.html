@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+        <a href="{% url 'profile' %}" class="tab-link">Your Orders</a>
+        <a href="{% url 'edit_profile' %}" class="tab-link active">Edit your details</a>
+        <a href="{% url 'account_change_password' %}" class="tab-link">Change password</a>
+    </div>
+
+    <!-- Page Heading -->
+    <h1 class="text-center mb-4">Edit Your Profile</h1>
+    <p class="text-center description">
+        Keep your contact information up to date to ensure smooth communication and delivery. 
+        Edit your details below and save the changes.
+    </p>
+
+    <!-- Profile Edit Form -->
+    <form method="post" class="profile-form">
+        {% csrf_token %}
+
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Personal Details</legend>
+            {{ user_form.as_p }}
+        </fieldset>
+
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Profile Details</legend>
+            {{ profile_form.as_p }}
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+
+<!-- CSS Styling -->
+<style>
+    /* General Container Styling */
+
+    /* Tabs Styling */
+    .tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    .tab-link {
+        text-decoration: none;
+        padding: 12px 20px;
+        color: #555;
+        font-size: 16px;
+        font-weight: bold;
+        margin-right: 20px;
+        border-bottom: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    .tab-link:hover {
+        color: #d63384;
+    }
+
+    .tab-link.active {
+        color: #d63384;
+        border-bottom: 2px solid #d63384;
+    }
+
+    /* Page Description */
+    .description {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    /* Form Styling */
+    .profile-form {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .fieldset {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 25px 20px;
+        background-color: #fdfdfd;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .fieldset-legend {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .profile-form input[type="text"],
+    .profile-form input[type="email"],
+    .profile-form input[type="password"],
+    .profile-form textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 16px;
+        margin-bottom: 15px;
+        transition: border-color 0.3s;
+    }
+
+    .profile-form input:focus,
+    .profile-form textarea:focus {
+        outline: none;
+        border-color: #d63384;
+        box-shadow: 0 0 5px rgba(214, 51, 132, 0.2);
+    }
+
+    .btn-primary {
+        background-color: #d63384;
+        color: white;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease;
+        align-self: center;
+    }
+
+    .btn-primary:hover {
+        background-color: #c02472;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .tabs {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tab-link {
+            margin-right: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .profile-form {
+            padding: 0 15px;
+        }
+    }
+</style>
+{% endblock %}
