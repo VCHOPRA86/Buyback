@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="success-container">
+    <h1>Thank You for Your Sale!</h1>
+    <p class="subtitle">Your sell order has been successfully placed.</p>
+
+    <div class="order-summary">
+        <h2>Order Summary</h2>
+        <p><strong>Order Number:</strong> {{ order_number }}</p>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Gadget Type</th>
+                    <th>Condition</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product_name }} {{ item.storage_size }} {{ item.network }}</td>
+                    <td>{{ item.condition }}</td>
+                    <td>£{{ item.value }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="subtotal">
+            <span>Total Value:</span>
+            <span class="total-price">£{{ cart_total }}</span>
+        </div>
+    </div>
+
+    
+        <h2>Postage Option</h2>
+        <p>{{ order.get_postage_option_display }}</p>
+    
+        {% if order.postage_option == 'prepaid' %}
+            <a href="{{ label_url }}" target="_blank" class="btn btn-primary">Download Prepaid Label</a>
+            <p>Tracking Code: <strong>{{ tracking_code }}</strong></p>
+
+
+        {% elif order.postage_option == 'paid_by_sender' %}
+        <p class="info-text"><strong>Important!</strong> Please either print this page or write down our address, including your sell order number.</p>
+        <p>A copy has also been sent to your email address.</p>
+  
+             <!-- Postage Label Design -->
+        <div class="postage-label">
+            <div class="label-content">
+                <div class="sender-details">
+                    <p><strong>CashThatGadget</strong></p>
+                    <p>Order No: {{order_number}}</p>
+                    <p>Address line 1</p>
+                    <p>Address line 2</p>
+                    <p>Address line 3</p>
+                    <p>Postcode</p>
+                </div>
+
+                <div class="postage-info-box">
+                    <p><strong>Postage</strong></p>
+                    <p>must be</p>
+                    <p><strong>paid by sender</strong></p>
+                </div>
+            </div>
+        </div>
+         
+                <div class="download-label">
+                    <p><strong>Print this label for your shipment:</strong></p>
+                    <button class="print-btn" onclick="window.print()">Print Label</button>
+                </div>
+            
+        {% else %}
+            <p>No postage option selected</p>
+        {% endif %}
+    
+    
+
+    <div class="confirmation-note">
+        <p>
+            Your payment method: 
+            {% if payment_method == 'paypal' %}
+                PayPal
+            {% elif payment_method == 'bank-transfer' %}
+                Bank Transfer
+            {% else %}
+                {{ payment_method|capfirst }}
+            {% endif %}
+        </p>
+        <p>We will process your payment within 3-5 business days. Check your email for more details.</p>
+    </div>
+
+    <div class="action-buttons">
+        <a href="{% url 'home' %}" class="back-home">Return to Home</a>
+    </div>
+</div>
+
+<style>
+.success-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #f9fff9;
+    border: 4px solid #28a745;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #28a745;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.order-summary {
+    margin-top: 20px;
+}
+
+.order-summary h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.total-price {
+    color: #28a745;
+}
+
+.confirmation-note {
+    margin-top: 20px;
+    background-color: #f7fcf7;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.action-buttons {
+    margin-top: 30px;
+}
+
+.back-home {
+    padding: 10px 20px;
+    border: 2px solid #28a745;
+    background-color: #fff;
+    color: #28a745;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.back-home:hover {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* Postage label styles */
+.postage-label {
+        margin-top: 20px;
+        border: 2px dashed #28a745;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: left;
+        position: relative;
+    }
+
+    .label-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+    }
+
+    .sender-details {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .postage-info-box {
+        text-align: center;
+        border: 2px dashed #888;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: #f9f9f9;
+        color: #444;
+    }
+
+    .postage-info-box p {
+        margin: 5px 0;
+    }
+
+    .print-instruction {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #555;
+    }
+
+.print-btn {
+   background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.print-btn:hover {
+    background-color: #ff0074;
+}
+
+    /* Print-only styles */
+@media print {
+
+     /* Set page size to A4 */
+
+     @page {
+        size: A4;
+        margin: 0;
+    }
+    /* Hide elements that should not be printed */
+    .print-instruction,
+    .btn {
+        display: none !important;
+    }
+
+
+
+    /* Optional: Make the postage label full-width for print */
+    .postage-label {
+        border: 2px solid #000; /* Ensure borders are visible */
+        padding: 20px;
+        margin: 0;
+        width: 100%;
+    }
+    .footer-top {
+        display: none !important;
+    }
+}
+
+</style>
+
+{% endblock %}
