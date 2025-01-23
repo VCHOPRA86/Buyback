@@ -125,7 +125,7 @@ jQuery(document).ready(function($) {
                 if (data.products.length > 0) {
                     productsFound = true;
                     data.products.forEach(function(product) {
-                        var productUrl = '/products/product/' + product.id + '/';
+                        var productUrl = '/sell/' + product.slug + '/';
                         $(suggestionsListId).append('<li><a href="' + productUrl + '">' + product.name + '</a></li>');
                     });
                 } else {

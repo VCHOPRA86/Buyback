@@ -10,3 +10,170 @@ form .aligned p.help, form .aligned div.help {
 div.help code {
     color: red;
 }
+
+
+.inline-group .tabular td.original p{
+    display: none;
+}
+
+.inline-group .tabular tr.has_original td{
+    padding-top: 0;
+}   
+
+
+/* static/css/custom_admin.css */
+
+/* Change the background color of the admin sidebar */
+.navbar.navbar-expand-lg {
+    background-color: #2c3e50 !important;
+}
+
+#sidebar {
+    background-color: #34495e !important;
+}
+
+#sidebar a {
+    color: #ecf0f1 !important;
+}
+
+#sidebar a:hover {
+    background-color: #1abc9c !important;
+}
+
+/* Change the color of the site title */
+#site-name {
+    color: #ecf0f1;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Customizing buttons */
+button.btn.btn-primary {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+button.btn.btn-primary:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+}
+
+.btn-xs {
+    font-size: 13px;
+    padding: 12px 12px;
+}
+
+/* Customize the icons for the navigation menu */
+
+/* Email addresses */
+a[href="/admin/account/emailaddress/"] .nav-icon::before {
+    content: "\f0e0"; /* Unicode for FA envelope */
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900; 
+    color: #007bff; /* Set to a blue shade for better visibility */
+}
+
+/* Contact submissions */
+a[href="/admin/contact/contactsubmission/"] .nav-icon::before {
+    content: "\f086"; /* Unicode for FA comments */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #007bff;
+}
+
+/* Email templates */
+a[href="/admin/email_templates/emailtemplate/"] .nav-icon::before {
+    content: "\f15c"; /* Unicode for FA file-text */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #007bff;
+}
+
+/* Orders */
+a[href="/admin/checkout/order/"] .nav-icon::before {
+    content: "\f291"; /* Unicode for FA credit-card */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #28a745; /* Green for orders */
+}
+
+/* Brands */
+a[href="/admin/products/brand/"] .nav-icon::before {
+    content: "\f02b"; /* Unicode for FA trademark */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #ff0000; /* Red for brands */
+}
+
+/* Categories */
+a[href="/admin/products/category/"] .nav-icon::before {
+    content: "\f07b"; /* Unicode for FA folder-open */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #6c757d;
+}
+
+/* Products */      
+a[href="/admin/products/product/"] .nav-icon::before {
+    content: "\f0a5"; /* Unicode for FA archive */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #17a2b8; /* Teal for products */
+}
+
+/* Storage */
+a[href="/admin/products/storageoption/"] .nav-icon::before {
+    content: "\f187"; /* Unicode for FA database */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #ffc107; /* Yellow for storage */
+} 
+
+/* Customers Icon */
+a[href="/admin/profiles/profile/"] .nav-icon::before {
+    content: "\f007"; /* Unicode for Font Awesome user icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #007bff;
+}
+
+/* Global settings */
+a[href="/admin/settings/globalsettings/"] .nav-icon::before {
+    content: "\f013"; /* Unicode for FA cogs */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #000000;
+}
+
+
+/* Sites */
+a[href="/admin/sites/site/"] .nav-icon::before {
+    content: "\f0ac"; /* Unicode for FA globe */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #6c757d;
+}
+
+/* Social accounts*/
+a[href="/admin/socialaccount/socialaccount/"] .nav-icon::before {
+    content: "\f007"; /* Unicode for FA user-circle */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #007bff;
+}
+
+/* Social application tokens */ 
+a[href="/admin/socialaccount/socialtoken/"] .nav-icon::before {
+    content: "\f084"; /* Unicode for FA key */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #007bff;
+}
+
+/* Social applications */
+a[href="/admin/socialaccount/socialapp/"] .nav-icon::before {
+    content: "\f0e7"; /* Unicode for FA plug */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #007bff;
+}
