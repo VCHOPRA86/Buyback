@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 class ContactSubmission(models.Model):
@@ -12,3 +13,4 @@ class ContactSubmission(models.Model):
 
     def __str__(self):
         return f"Message from {self.name} ({self.email})"
+    

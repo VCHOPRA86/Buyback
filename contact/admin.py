@@ -1,9 +1,9 @@
 
-# Register your models here.
 # contact_us/admin.py
 
 from django.contrib import admin
 from .models import ContactSubmission
+
 
 @admin.register(ContactSubmission)
 class ContactSubmissionAdmin(admin.ModelAdmin):
@@ -11,7 +11,7 @@ class ContactSubmissionAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email')
     readonly_fields = ('name', 'email', 'company', 'order_no', 'phone', 'message', 'submitted_at')
 
- # Disable the "Add" button
+     # Disable the "Add" button
     def has_add_permission(self, request):
         return False
     
