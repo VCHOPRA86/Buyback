@@ -1,4 +1,4 @@
-{% extends "base.html "%}
+{% extends "base.html" %}
 {% load static %}
 
 {% block content %}
@@ -83,7 +83,7 @@
               <img src="{% static 'images/steps/step3.png' %}" alt="step 3">
               <div class="content">
                 <p>STEP 3</p>
-                <h4>Post Your Device</h4>
+                <h4>Post Your Gadget</h4>
               </div>
             </div>
           </div>
@@ -106,158 +106,39 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="block clearfix heading h-black">
-                    <h2>Popular <span>Devices</span></h2>
+                    <h2>Sell by <span>Categories</span></h2>
                 </div>
             </div>
         </div>
-        <div class="swiper-container device-swiper">
-            <div class="swiper-wrapper">
+        <div class="row category-grid">
                 {% for category in categories %}
-                    <a href="{% url 'category_brands' category.id %}" class="swiper-slide device">
+                <div class="col-6 col-md-4 col-lg-3 mb-4">
+                  <a href="{% url 'category_brands' category_slug=category.slug %}" class="category-item text-center d-block">
                         {% if category.image %}
-                            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                            <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-image img-fluid mb-3">
                         {% else %}
-                            <img src="{% static 'images/default-image.jpg' %}" alt="Default Image">
+                            <img src="{% static 'images/default-image.jpg' %}" alt="Default Image" class="category-image img-fluid mb-3">
                         {% endif %}
                         <h4>{{ category.name }}</h4>
                     </a>
+                    </div>
                 {% endfor %}
             </div>
         </div>
-    </div>
 </section>
 
 
 <!-- Popular devices end here -->
 
 
-<!---Top sellers starts here-->
-      </section>
-      <section class="top-sellers">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="heading h-black">
-                        <h2>Our Top <span>Sellers</span></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-container seller-swiper">
-              <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-                    <!-- Slide 1 -->
-                    <div class="swiper-slide">
-                        <div class="content">
-                            <img src="assets/images/seller/seller1.png" alt="iPhone X" class="phone-image">
-                            <h6>Apple</h6>
-                            <p>iPhone X - 32GB</p>
-                            <div class="price">£65.00</div>
-                        </div>
-                    </div>
-                    <!-- Slide 2 -->
-                    <div class="swiper-slide">
-                        <div class="content">
-                            <img src="assets/images/seller/seller2.png" alt="Samsung Galaxy S8" class="phone-image">
-                            <h6>Samsung</h6>
-                            <p>Galaxy S8 - 64GB</p>
-                            <div class="price">£45.00</div>
-                        </div>
-                    </div>
 
-                     <!-- Slide 2 -->
-                     <div class="swiper-slide">
-                      <div class="content">
-                          <img src="assets/images/seller/seller3.png" alt="Samsung Galaxy S8" class="phone-image">
-                          <h6>Samsung</h6>
-                          <p>Galaxy S8 - 64GB</p>
-                          <div class="price">£45.00</div>
-                      </div>
-                  </div>
 
-                   <!-- Slide 2 -->
-                   <div class="swiper-slide">
-                    <div class="content">
-                        <img src="assets/images/seller/seller4.png" alt="Samsung Galaxy S8" class="phone-image">
-                        <h6>Samsung</h6>
-                        <p>Galaxy S8 - 64GB</p>
-                        <div class="price">£45.00</div>
-                    </div>
-                </div>
 
-                 <!-- Slide 2 -->
-                 <div class="swiper-slide">
-                  <div class="content">
-                      <img src="assets/images/seller/seller5.png" alt="Samsung Galaxy S8" class="phone-image">
-                      <h6>Samsung</h6>
-                      <p>Galaxy S8 - 64GB</p>
-                      <div class="price">£45.00</div>
-                  </div>
-              </div>
-
-              <div class="swiper-slide">
-                <div class="content">
-                    <img src="assets/images/seller/seller5.png" alt="Samsung Galaxy S8" class="phone-image">
-                    <h6>Samsung</h6>
-                    <p>Galaxy S8 - 64GB</p>
-                    <div class="price">£45.00</div>
-                </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="content">
-                  <img src="assets/images/seller/seller5.png" alt="Samsung Galaxy S8" class="phone-image">
-                  <h6>Samsung</h6>
-                  <p>Galaxy S8 - 64GB</p>
-                  <div class="price">£45.00</div>
-              </div>
-          </div>
-                    <!-- Add more slides as needed -->
-                </div>
-                <!-- Pagination controls -->
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-    </section>
-    
     <!---ends-->
 
     <!---Brands start Here-->
-			          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
-      <section class="brand-heading-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="block clearfix heading h-white">
-                <h2><span>Brands</span></h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="brand-section clearfix">
-        <div class="container">
-          <div class="swiper-container brand-swiper swiper-container-horizontal">
-            <div class="swiper-wrapper">
-              {% for brand in brands %}
-                <div class="swiper-slide" style="width: 162px; margin-right: 30px;">
-                  <a href="{% url 'category_brands' category_id=brand.category_id %}" class="text-decoration-none d-block">
-                    {% if brand.image %}
-                      <img src="{{ brand.image.url }}" class="img-fluid manufacturer-image" alt="{{ brand.name }}">
-                    {% else %}
-                      <img src="{% static 'images/default-image.jpg' %}" class="img-fluid manufacturer-image" alt="Default Image">
-                    {% endif %}
-                  </a>
-                </div>
-              {% endfor %}
-            </div>
-            <!-- Swiper pagination and navigation controls -->
-            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
-            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-          </div>
-        </div>
-      </section>
+			        
+        
       
     <!---Ends-->
 
@@ -308,8 +189,66 @@
 }
 
 
+/* Individual Category Item Styling */
+.category-item {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Category Image */
+.category-image {
+    max-height: 150px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Category Name */
+.category-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 10px;
+    color: #333;
+    text-transform: capitalize;
+}
+
+/* Styling the h4 inside category-item */
+.category-item h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #555; /* Adjust the color to your preference */
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.category-item:hover h4 {
+    color: #007bff; /* Change color on hover */
+}
+
+
+
+@media (max-width: 576px) {
+    .category-name {
+        font-size: 0.9rem;
+    }
+}
+
+
 
     </style>
+
+
 
 
 {% endblock%}

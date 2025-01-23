@@ -1,13 +1,21 @@
-from django.conf import settings
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
+from revieworder.models import Cart
 from products.models import Category, Brand, Product
 from django.http import JsonResponse
+from allauth.account.forms import LoginForm
 
+
+
+def base_view(request):
+    cart_items = Cart.objects.all()  # Fetch cart items for global access
+    return render(request, 'base.html', {'cart_items': cart_items})
 
 # The home view for rendering the home page
 def home(request):
     categories = Category.objects.all()
     brands = Brand.objects.all()  # Query the Brand model to get all brands
+ 
+    
     return render(request, 'home/index.html', {'categories': categories, 'brands': brands })
 
 # Additional views for static pages
@@ -34,6 +42,14 @@ def signup(request):
 def login(request):
     return render(request, 'home/login.html')
 
+# Terms & conditions
+def terms(request):
+    return render(request, 'home/terms.html')
+
+# Privacy policy
+def policy(request):
+    return render(request, 'home/policy.html')
+
 
 def autocomplete_products(request):
     # Get the search query parameter
@@ -42,8 +58,12 @@ def autocomplete_products(request):
     # If there's a query, filter the products by name
     if query:
         products = Product.objects.filter(name__icontains=query)  # Case-insensitive search
-        product_data = [{'id': product.id, 'name': product.name} for product in products]
+        product_data = [{'id': product.id, 'name': product.name, 'slug': product.slug} for product in products]
     else:
         product_data = []
 
     return JsonResponse({'products': product_data})
+
+
+
+

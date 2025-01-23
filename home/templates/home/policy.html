@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p>Effective Date: December 20, 2024</p>
+    </div>
+
+
+<main class="content container">
+    <section>
+        <h2>1. Introduction</h2>
+        <p>At CashThatGadget, we value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and store your data.</p>
+    </section>
+
+    <section>
+        <h2>2. Information We Collect</h2>
+        <ul>
+            <li><strong>Personal Information:</strong> Name, email, phone number, and payment details.</li>
+            <li><strong>Device Information:</strong> Details of the gadget you wish to sell.</li>
+            <li><strong>Usage Data:</strong> Information about your interaction with our website.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. How We Use Your Information</h2>
+        <p>We use your information to provide and improve our services, process transactions, and communicate with you about your orders or inquiries.</p>
+    </section>
+
+    <section>
+        <h2>4. Sharing Your Information</h2>
+        <p>We do not sell your information. However, we may share your data with third-party service providers for order processing or legal purposes.</p>
+    </section>
+
+    <section>
+        <h2>5. Data Security</h2>
+        <p>We implement industry-standard security measures to protect your personal data from unauthorized access or disclosure.</p>
+    </section>
+
+    <section>
+        <h2>6. Your Rights</h2>
+        <p>You have the right to access, update, or delete your personal data. Contact us at <a href="{% url 'contact' %}">here</a>  for assistance.</p>
+    </section>
+</main>
+<style>
+
+
+
+.content h2 {
+    color: #0056b3;
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.content ul {
+    list-style: disc inside;
+    margin-bottom: 1.5rem;
+}
+
+.content p {
+    margin-bottom: 1rem;
+}
+
+
+</style>
+
+{% endblock %}

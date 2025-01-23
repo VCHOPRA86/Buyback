@@ -1,4 +1,4 @@
-{% extends "base.html "%}
+{% extends "base.html" %}
 {% load static %}
 
 {% block content %}
@@ -58,7 +58,9 @@
 
 
 </style>
+<div class="wrapper">
 <section class="sell-mobile-section py-5">
+   
     <div class="container">
         <h2 class="text-center mb-4">Sell Your Gadget</h2>
         
@@ -69,7 +71,7 @@
                 {% for category in categories %}
                     <div class="col-md-4 col-lg-3 mb-4">
                         <div class="card h-100">
-                            <a href="{% url 'category_products' category.id %}" class="text-decoration-none text-dark">
+                            <a href="{% url 'category_products' category_slug=category.slug %}" class="text-decoration-none text-dark">
                                 <div class="category-image-wrapper">
                                     {% if category.image %}
                                         <img src="{{ category.image.url }}" class="category-image" alt="{{ category.name }}">
@@ -87,32 +89,11 @@
             </div>
         </div>
     </div>
+    
 </section>
+</div>
 
 
-<section class="sell-my-mobile-section">
-    <div class="container" id="manufacturers" style="min-height: 265px;">
-        <h3 class="text-center mb-4">Search by manufacturers</h3>
-
-        <div class="row manufacturers-grid">
-            {% for brand in brands %}
-                <div class="col-6 col-md-3 mb-3">
-                    <div class="manufacturer-tile text-center">
-                        <a href="{% url 'category_brands' category_id=brand.category_id %}" class="text-decoration-none d-block">
-                    
-                            {% if brand.image %}
-                                <img src="{{ brand.image.url }}" class="img-fluid manufacturer-image" alt="{{ brand.name }}">
-                            {% else %}
-                                <img src="{% static 'images/default-image.jpg' %}" class="img-fluid manufacturer-image" alt="Default Image">
-                            {% endif %}
-                            
-                        </a>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
         
 
     
