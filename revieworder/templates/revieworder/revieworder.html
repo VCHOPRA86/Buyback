@@ -7,76 +7,126 @@
     <h1>Review Your Sale</h1>
     <p>Please click on the Complete Sale button to complete the sale.</p>
 
+    
+
     <div class="sale-details">
         <h2>Your Sale Details:</h2>
+        {% if cart_items %}
         <table>
             <thead>
                 <tr>
                     <th>Remove</th>
                     <th>Gadget Type</th>
                     <th>Condition</th>
-                    <th>IMEI</th>
                     <th>Value</th>
                 </tr>
             </thead>
             <tbody>
-              
-                <tr>
-                    <td><button class="remove-btn"><i class="fa fa-trash"></i></button></td>
-                    <td>{{ item.device_name }}</td>
-                    <td>{{ item.condition }}</td>
-                    <td>--</td>
-                    <td>£520.00</td>
-                </tr>
-            
+  
+{% for item in cart_items %}
+<tr id="cart-item-{{ item.id }}">
+    <td>
+        <button type="button" class="remove-btn" onclick="removeFromCart('{{ item.id }}')">
+            <i class="fa fa-trash"></i>
+        </button>
+    </td>
+    <td>{{ item.product_name }} {{ item.storage_size }} {{ item.network }}</td> 
+    <td>{{ item.condition }}</td>
+    <td>£{{ item.value }}</td>
+</tr>
+                
+                {% endfor %}
             </tbody>
         </table>
+        {% else %}
+        <p>No items in your basket.</p>
+        {% endif %}
+
         <div class="total">
             <span>SELL ORDER TOTAL:</span>
-            <span>£520.00</span>
+            <span class="total-price">£{{ cart_total }}</span>
         </div>
     </div>
+    <form method="post" action="{% url 'checkout:checkout' %}">
+        {% csrf_token %}
+
+     <!-- Hidden payment method input -->
+    <input type="hidden" id="payment-method" name="payment_method" value="bank-transfer">
 
     <div class="payment-method">
         <h2>Your preferred payment method: (tick to change)</h2>
         <div class="payment-options">
-           
-            <div class="payment-option selected">
-                
+            <!-- Bank Transfer Option -->
+            <div class="payment-option selected" onclick="selectPaymentMethod('bank-transfer')">
                 
                 <h3>Bank Transfer</h3>
-                <img src="{% static 'images/payments/bank-transfer.png'%}" alt="">
-                <p>We will send a bank transfer to your bank account.</p>
-                <span>£520.00</span>
-            </div>
-            <div class="payment-option">
+            
+               <i class="fa fa-check tick-icon" aria-hidden="true"></i>
+                <img src="{% static 'images/payments/bank-transfer.png' %}" alt="Bank Transfer">
+              
+                <p>We will pay <span class="cart-price">£{{ cart_total }}</span> directly into your bank account.</p>
                 
-               
-               
-                <h3>PayPal</h3>
-                <img src="{% static 'images/payments/paypal.png'%}" alt="">
-                <p>We will send payment by paypal to your paypal email address.</p>
-                <p></p>
-                <span>£520.00</span>
+                
             </div>
+    
+            <!-- PayPal Option -->
+            <div class="payment-option" onclick="selectPaymentMethod('paypal')">
+                <h3>PayPal</h3>
+                <i class="fa fa-check tick-icon" aria-hidden="true"></i>
+                <img src="{% static 'images/payments/paypal.png' %}" alt="PayPal">
+                <p>We will make a payment of <span id="paypal-total" class="cart-price">£{{ cart_total}}</span>       
+                   to your PayPal email address.</p>
+                
+            </div>
+        </div>
 
+        
+    
+        <!-- Payment Input Fields -->
+        <div class="payment-inputs">
+            <!-- Bank Transfer Fields -->
+            <div id="bank-transfer-fields">
+                <h4>Bank Transfer Details</h4>
+                <label for="account-name">Account Holder's Name:</label>
+                <input type="text" id="account-name" name="account_name" required>
+                
+                <label for="account-number">Account Number:</label>
+                <input type="text" id="account-number" name="account_number" required>
+                
+                <label for="sort-code">Sort Code:</label>
+                <div class="sort-code-container">
+                    <input type="text" id="sort-code-1" name="sort_code_1" maxlength="2" required>
+                    <input type="text" id="sort-code-2" name="sort_code_2" maxlength="2" required>
+                    <input type="text" id="sort-code-3" name="sort_code_3" maxlength="2" required>
+                </div>
+            </div>
+    
+            <!-- PayPal Fields -->
+            <div id="paypal-fields" style="display: none;">
+                <h4>PayPal Details</h4>
+                <label for="paypal-email">PayPal Email Address:</label>
+                <input type="email" id="paypal-email" name="paypal_email" required>
+            </div>
         </div>
     </div>
 
+
     <div class="coupon-section">
-        <input type="text" placeholder="COUPON CODE">
+        <input type="text" placeholder="COUPON CODE" name="coupon_code">
         <button class="apply-btn">APPLY</button>
     </div>
 
     <div class="final-summary">
         <span>Total Sale Value:</span>
-        <span>£520.00</span>
+        <span class="total-price"> £{{ cart_total }}</span>
     </div>
 
     <div class="action-buttons">
-        <button class="back-btn">BACK</button>
-        <button class="complete-sale-btn">COMPLETE SALE</button>
+        <a href="{% url 'product_detail' product_slug=product_slug %}" class="back-btn">BACK</a>
+        <button class="complete-sale-btn" type="submit">CONTINUE SALE</button>
     </div>
+    </form>
+    
 </div>
 
 <style>
@@ -139,7 +189,7 @@ tbody td {
 
 .total {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     font-weight: bold;
     background: #ff0080;
     color: white;
@@ -159,12 +209,14 @@ tbody td {
 }
 
 .payment-option {
+    position: relative; /* For absolute positioning of the tick icon */
     flex: 1;
     padding: 10px;
     border: 1px solid #ddd;
     text-align: center;
     border-radius: 5px;
     cursor: pointer;
+    transition: border 0.3s ease-in-out;
 }
 
 .payment-option.selected {
@@ -196,7 +248,7 @@ tbody td {
 
 .final-summary {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 20px;
@@ -204,7 +256,8 @@ tbody td {
 
 .action-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 .back-btn,
@@ -225,8 +278,261 @@ tbody td {
     background: #ff0080;
     color: white;
 }
+.payment-inputs {
+    margin-top: 20px;
+}
+
+.payment-inputs h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.payment-inputs label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.payment-inputs input {
+    width: 50%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.sort-code-container {
+    display: flex;
+    gap: 5px;
+}
+
+.sort-code-container input {
+    width: 50px;
+    text-align: center;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.tick-icon {
+    display: none;
+    color: #28a745; /* Green color for tick */
+    font-size: 25px;
+    position: absolute;
+    right: 20px; 
+    transition: color 0.3s;
+    border: 1px solid #28a745;
+    border-radius: 50%;
+}
+
+.payment-option.selected .tick-icon {
+    display: inline-block;
+}
+
+
+span.total-price {
+    padding-left: 4px;
+}
+
+.cart-price {
+    font-weight: bold;
+    font-size: 15px;
+
+}
+
+.remove-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745; /* Green color */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+.remove-message.fade-out {
+    opacity: 0;
+}
 
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Function to select the payment method
+        function selectPaymentMethod(method) {
+            const paymentMethodInput = document.getElementById('payment-method');
+            if (!paymentMethodInput) {
+                console.error("Payment method input not found!");
+                return;
+            }
+    
+            // Update the hidden input value for the selected payment method
+            paymentMethodInput.value = method;
+    
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            const bankFields = document.getElementById('bank-transfer-fields');
+            const paypalFields = document.getElementById('paypal-fields');
+    
+            if (!bankFields || !paypalFields) {
+                console.error("Bank or PayPal fields not found!");
+                return;
+            }
+    
+            // Remove 'selected' class from all options
+            paymentOptions.forEach(option => option.classList.remove('selected'));
+    
+            // Toggle visibility and disable/unselect appropriate fields
+            if (method === 'bank-transfer') {
+                document.querySelector('.payment-option:nth-child(1)').classList.add('selected');
+                bankFields.style.display = 'block';
+                paypalFields.style.display = 'none';
+    
+                // Enable bank transfer fields and disable PayPal fields
+                enableFields(bankFields);
+                disableFields(paypalFields);
+            } else if (method === 'paypal') {
+                document.querySelector('.payment-option:nth-child(2)').classList.add('selected');
+                bankFields.style.display = 'none';
+                paypalFields.style.display = 'block';
+    
+                // Enable PayPal fields and disable bank transfer fields
+                enableFields(paypalFields);
+                disableFields(bankFields);
+            } else {
+                console.error("Invalid payment method selected.");
+            }
+        }
+    
+        // Enable all input fields within a container
+        function enableFields(container) {
+            container.querySelectorAll('input').forEach(input => {
+                input.disabled = false;
+                input.required = true;
+            });
+        }
+    
+        // Disable all input fields within a container
+        function disableFields(container) {
+            container.querySelectorAll('input').forEach(input => {
+                input.disabled = true;
+                input.required = false;
+            });
+        }
+    
+        // Add focus handling for sort code inputs
+        document.querySelectorAll('.sort-code-container input').forEach((input, index, inputs) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 2 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+    
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+    
+        // Function to remove item from the cart
+        function removeFromCart(itemId) {
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]');
+    if (!csrfToken) {
+        console.error("CSRF token not found!");
+        return;
+    }
+
+    fetch(`/revieworder/remove-from-cart/${itemId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken.value,
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Remove the item row from the table
+            const itemRow = document.getElementById(`cart-item-${itemId}`);
+            if (itemRow) {
+                itemRow.remove();
+            }
+
+            // Update the total price
+            const totalPriceElement = document.querySelector('.total-price');
+            if (totalPriceElement) {
+                totalPriceElement.textContent = `£${data.cart_total.toFixed(2)}`;
+            }
+
+            const cartPriceElement = document.querySelector('.cart-price');
+            if (cartPriceElement) {
+                cartPriceElement.textContent = `£${data.cart_total.toFixed(2)}`;
+            }
+            
+             // Update the total price in payment method sections (bank-transfer and paypal)
+             updatePaymentMethodTotals(data.cart_total)
+
+
+            showTemporaryMessage('Item removed from cart.', 'success');
+        } else {
+            showTemporaryMessage(data.message, 'error');
+        }
+    })
+    .catch(error => {
+        console.error("Error removing item from cart:", error);
+        showTemporaryMessage("An error occurred. Please try again.", 'error');
+    });
+}
+// Function to update the total price in payment method sections (bank-transfer and paypal)
+function updatePaymentMethodTotals(cartTotal) {
+    const bankTransferTotalElement = document.getElementById('bank-transfer-total');
+    const paypalTotalElement = document.getElementById('paypal-total');
+
+    if (bankTransferTotalElement) {
+        bankTransferTotalElement.textContent = `£${cartTotal.toFixed(2)}`;
+
+    }
+    
+    if (paypalTotalElement) {
+        paypalTotalElement.textContent = `£${cartTotal.toFixed(2)}`;
+    }
+    const cartPriceElement = document.querySelector('.cart-price');
+    if (cartPriceElement) {
+        cartPriceElement.textContent = `£${cartTotal.toFixed(2)}`;
+    }
+
+
+}    
+        // Function to display temporary messages
+        function showTemporaryMessage(message, type) {
+            const messageContainer = document.createElement('div');
+            messageContainer.className = `remove-message ${type}`;
+            messageContainer.textContent = message;
+
+            document.body.appendChild(messageContainer);
+
+            // Fade out and remove the message after 3 seconds
+            setTimeout(() => {
+                messageContainer.classList.add('fade-out');
+                setTimeout(() => messageContainer.remove(), 1000);
+            }, 3000);
+        }
+
+        // Expose functions globally for inline use in HTML
+        window.removeFromCart = removeFromCart;
+        window.selectPaymentMethod = selectPaymentMethod;
+    
+        // Initialize default payment method
+        selectPaymentMethod('bank-transfer'); // Default to bank transfer on page load
+    });
+</script>
 
 
 
