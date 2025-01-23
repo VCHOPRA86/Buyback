@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from .models import Category, Brand, Product
 from decimal import Decimal
 
+
+
 def brand_products(request, brand_id):
     # View to list products filtered by brand
     brand = get_object_or_404(Brand, id=brand_id)
@@ -28,12 +30,12 @@ def category_list(request):
     return render(request, 'products/category_list.html', {'categories': categories})
 
 
-def category_products(request, category_id):
-    # Fetch category based on the category_id
-    category = Category.objects.get(id=category_id)
+def category_products(request, category_slug):
+    # Retrieve the category by its slug
+    category = get_object_or_404(Category, slug=category_slug)
 
     # Get all brands to populate the brand filter
-    brands = Brand.objects.all()
+    brands = Brand.objects.filter(products__category=category).distinct()
 
     # Start with all products in the category
     products = Product.objects.filter(category=category)
@@ -55,9 +57,9 @@ def category_products(request, category_id):
         'products': products
     })
 
-def brand_list(request, category_id):
+def brand_list(request, category_slug):
     # View to list brands for a given category
-    category = get_object_or_404(Category, id=category_id)
+    category = get_object_or_404(Category, slug=category_slug)
     brands = category.brand_set.all()
     brands = Brand.objects.filter(category=category)
     return render(request, 'products/brand_list.html', {
@@ -65,10 +67,11 @@ def brand_list(request, category_id):
         'brands': brands,
     })
 
-def product_list(request, category_id, brand_id):
+def product_list(request, category_slug, brand_slug):
     # View to list products filtered by category and brand
-    category = get_object_or_404(Category, id=category_id)
-    brand = get_object_or_404(Brand, id=brand_id)
+    
+    category = get_object_or_404(Category, slug=category_slug)
+    brand = get_object_or_404(Brand, slug=brand_slug)
     products = Product.objects.filter(category=category, brand=brand)
     return render(request, 'products/product_list.html', {
         'category': category,
@@ -76,35 +79,61 @@ def product_list(request, category_id, brand_id):
         'products': products,
     })
 
-def product_detail(request, pk):
-    # View to display product details
-    product = get_object_or_404(Product, pk=pk)
+def product_detail(request, product_slug):
+    print(f"Product Slug: {product_slug}")  # Debugging the slug
+    # Retrieve the product or return a 404
+    product = get_object_or_404(Product, slug=product_slug)
     
-    # Check if network selection is required for this product
-    is_network_required = product.category.name.lower() == 'phone'
+    # Get all storage options for the product
+    storage_options = product.storage_options.all()
+
+    # Determine if network selection is required
+    is_network_required = product.category.name.lower() in ['phones', 'tablets']
+
 
     if request.method == 'POST':
-        # Handle dynamic price update based on condition and network status
+        # Handle dynamic price updates based on input
         import json
         data = json.loads(request.body)
+        
+        # Extract condition, network status, and storage size
         condition = data.get('condition', 'working')
-        network_status = data.get('network_status', 'unlocked')
-        updated_price = product.get_price_by_condition_and_network(condition, network_status)
-        return JsonResponse({'updated_price': str(updated_price)})
+        network = data.get('network', 'unlocked')
+        storage_size = data.get('storage_size')
 
-    # Render the product detail page
+        print(f"Condition: {condition}, Network: {network}, Storage Size: {storage_size}")  # Debug individual fields
+        
+        # Calculate base price based on condition and network status
+        updated_price = product.get_price_by_condition_and_network(condition, network)
+
+        # Add price adjustment for selected storage size
+        if storage_size:
+            storage_option = product.storage_options.filter(size=storage_size).first()
+            if storage_option:
+                updated_price += storage_option.additional_price
+
+        # Format the updated price to two decimal places
+        formatted_price = "{:.2f}".format(updated_price)
+
+        # Return the updated price
+        return JsonResponse({'updated_price': formatted_price})
+
+    # Render the product detail template
     return render(request, 'products/product_detail.html', {
         'product': product,
-        'price': product.working_price,
+        'storage_options': storage_options,
         'is_network_required': is_network_required,
+        
+    
     })
 
+
 def search_results(request):
-    search_query = request.GET.get('search', '')  # Get the search query from the GET request
+    search_query =request.GET.get('search', '')  # Get the search query from the GET request
     products = Product.objects.filter(name__icontains=search_query)  # Case-insensitive search by product name
     
     if request.is_ajax():  # Check if the request is AJAX (for JSON response)
-        products_data = [{'id': product.id, 'name': product.name} for product in products]
+        products_data = [{'slug': product.slug, 'name': product.name} for product in products]
         return JsonResponse({'products': products_data, 'search_query': search_query})
     
     # If it's not an AJAX request, render the results in a template
@@ -127,4 +156,7 @@ def search_products(request):
             })
         return JsonResponse({'products': products_data})
     return JsonResponse({'products': []})
-    
+
+
+
+

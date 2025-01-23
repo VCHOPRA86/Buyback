@@ -3,39 +3,92 @@
 
 {% block content %}
 
+    
 <div class="container my-5">
-    <h1 class="my-3">{{ product.name }}</h1>
+    <h1 class="my-3">{{ product.name }}  
+        <span id="storage-display-text">{{ default_storage }}</span>
+        <span id="network-display-text">{{ network }}</span>
+    </h1>
     <div class="row">
        
         <!-- Product Image and Details -->
-        <div class="col-md-4">
+        <div class="col-md-3">
            
             <div class="card shadow-sm">
+                {% if product.image %}
                 <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
+                {% else %}
+                <img src="{% static 'images/default-image.png' %}" alt="Default image">
+                {% endif %}
             </div>
         </div>
 
-        <form id="condition-network-form" method="post" style="display: none;">
-            {% csrf_token %}
-            <input type="hidden" name="condition" id="condition-input" value="">
-           
-            <input type="hidden" name="network_status" id="network-input" value="">
+        <div id="error-message" style="display: none; color: red; font-weight: bold; margin-top: 10px;">
+        </div>
 
-        </form>
-        
-        <div class="col-md-4">
+
+        <div class="col-md-5">
           
             <p class="lead">{{ product.description }}</p>
+
+            <div class="storage-options my-4">
+                <h4 class="mb-3">Choose Storage:</h4>
+                <div class="btn-group" role="group">
+                    {% for option in storage_options %}
+                        <button 
+                            class="btn storage-option-button px-4 py-2 me-2"
+                            data-size="{{ option.size }}"
+                            data-additional-price="{{ option.additional_price }}"
+                            onclick="updateStorage('{{ option.size }}', '{{ option.additional_price }}')"
+                            aria-label="Select {{ option.size }} storage">
+                            <span class="option-text">{{ option.size }}</span>
+                            <span class="tick-icon" style="display: none;">&#10003;</span> <!-- This is the tick mark -->
+                        </button>
+                    {% endfor %}
+                </div>
+            </div>
+
+             <!-- Conditionally show network status selection -->
+            
+             {% if is_network_required %}
+             <h4>Select Network:</h4>
+             <div class="network-icons mt-3" role="group" aria-label="Network status">
+                <img src="{% static 'images/network/Unlocked.png' %}" alt="Unlocked" class="network-btn" onclick="updateNetwork('unlocked')" aria-label="Unlocked Network" />
+                <img src="{% static 'images/network/EE.png' %}" alt="EE" class="network-btn" onclick="updateNetwork('ee')" />
+                <img src="{% static 'images/network/O2.png' %}" alt="O2" class="network-btn" onclick="updateNetwork('o2')" />
+                <img src="{% static 'images/network/Vodafone.png' %}" alt="Vodafone" class="network-btn" onclick="updateNetwork('vodafone')" />
+                <img src="{% static 'images/network/Three.png' %}" alt="Three" class="network-btn" onclick="updateNetwork('three')" />
+                <!-- Add more images for other network statuses as needed -->
+            </div>
+            {% endif %}
             
          
 
             <!-- Buttons for condition selection -->
-            <h4>Select Condition:</h4>
-            <div class="btn-group" role="group" aria-label="Product condition">
-               
-                <button type="button" class="btn btn-success" id="workingBtn" onclick="updatePrice('working')">Working</button>
-                <button type="button" class="btn btn-danger" id="faultyBtn" onclick="updatePrice('faulty')">Faulty</button>
+            <div class="condition-selection my-4">
+                <h4 class="mb-3">Select Condition:</h4>
+                <div class="btn-group condition-buttons" role="group" aria-label="Product condition">
+                    <button 
+                        type="button" 
+                        class="btn btn-condition working-btn" 
+                        id="workingBtn" 
+                        onclick="updatePrice('working')"
+                        aria-label="Select Working Condition">
+                        Working
+                        <span class="tick-icon" style="display: none;">&#10003;</span>
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-condition faulty-btn" 
+                        id="faultyBtn" 
+                        onclick="updatePrice('faulty')">
+                        Faulty
+                        <span class="tick-icon" style="display: none;">&#10003;</span>
+                    </button>
+                </div>
             </div>
+           
+                
 
             <!-- Conditionally show the relevant condition description -->
             <div id="condition-descriptions" class="mt-3">
@@ -46,15 +99,7 @@
                     <p>{{ product.faulty_description|safe }}</p>
                 </div>
             </div>
-             <!-- Conditionally show network status selection -->
-              <h4>Select Network:</h4>
-             {% if is_network_required %}
-             <div class="network-icons mt-3" role="group" aria-label="Network status">
-                <img src="{% static 'images/network/Unlocked.png' %}" alt="Unlocked" class="network-btn" onclick="updateNetwork('unlocked')" />
-                <img src="{% static 'images/network/EE.png' %}" alt="EE" class="network-btn" onclick="updateNetwork('ee')" />
-                <!-- Add more images for other network statuses as needed -->
-            </div>
-            {% endif %}
+            
             
            
         </div>
@@ -66,12 +111,27 @@
     {% if is_network_required %}
     <p><strong>Network Status:</strong> <span id="network-display"></span></p>
     {% endif %}
+    <p><strong>Storage:</strong> <span id="storage-display"></span></p>
+  
     <div class="divider"></div>
-    <h3>We'll pay you: <br><span id="price-display">£{{ price }}</span></h3>
-    <a href="{% url 'revieworder' %}" class="btn btn-primary mt-3">Sell this device </a>
+    <h3>We'll pay you: <br><span id="price-display">{{ price }}</span></h3>
+    <form method="post" action="{% url 'revieworder:add_to_cart' product_slug=product.slug %}">
+        {% csrf_token %}
+        <input type="hidden" name="product_name" value="{{ product.name }}">
+        <input type="hidden" name="storage_size" id="storage-input" value="{{ default_storage }}">
+        <input type="hidden" name="condition" id="condition-input" value="{{ product.default_condition|default:'working' }}">
+        {% if is_network_required %}
+        <input type="hidden" name="network" id="network-input">
+        {% endif %}
+        <input type="hidden" name="price" id="price-input" value="{{ price }}">
+        <button type="submit" class="btn btn-primary mt-3">Sell this device</button>
+    
+    </form>
     <p class="text-muted mt-2">Unlike many other recyclers, our prices are guaranteed rather than 'up to' prices. Provided your device is received as described, you'll receive the full value. Please see our Price Promise for more details.</p>
 </div>
+
     </div>
+</div>
 </div>
 
 <style>
@@ -118,7 +178,8 @@
 
 .item-summary #condition-display,
 .item-summary #network-display,
-.item-summary #price-display {
+.item-summary #price-display,
+.item-summary #storage-display {
     font-weight: 700;
     color: #ff0000;
 }
@@ -131,7 +192,7 @@
     /* Styling for the product page */
     .card-img-top {
         max-width: 100%;
-        max-height: 400px;
+        max-height: 300px;
         object-fit: contain;
         height: auto;
     }
@@ -237,10 +298,128 @@
 }
 
 .tick-icon {
-    margin-right: 5px;
     color: green;  
+    background-color: #ffffff;
     font-size: 1em;
     vertical-align: middle;
+    border-radius: 50%;
+    padding: 6px;
+    position: absolute;
+    top: 2px;
+    right: 5px;
+
+}
+
+.storage-options h4 {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.storage-options .btn-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    gap: 10px;       /* Space between buttons */
+}
+
+.storage-option-button {
+    border: 2px solid #007bff;
+    background-color: rgb(0, 0, 0);
+    color: #007bff;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.storage-option-button:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05); /* Subtle zoom effect */
+}
+
+.storage-option-button:active {
+    background-color: #0056b3;
+    color: white;
+    transform: scale(0.95); /* Subtle press effect */
+}
+
+/* Condition selection styling */
+.condition-selection h4 {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Button group styling */
+.condition-buttons {
+    display: flex;
+    gap: 15px; /* Add space between buttons */
+}
+
+.btn-condition {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    width: 120px;
+    text-align: center;
+}
+
+/* Specific styles for each button */
+.working-btn {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid #28a745;
+}
+
+.working-btn:hover {
+    background-color: #ff0074;
+    color: #ffffff;
+    border-color: #28a745;
+    transform: scale(1.05); /* Subtle zoom effect */
+}
+
+.faulty-btn {
+    background-color: #ff0019;
+    color: white;
+    border: 2px solid #dc3545;
+}
+
+.faulty-btn:hover {
+    background-color: #ff0074;
+    color: #ffffff;
+    border-color: #dc3545;
+    transform: scale(1.05); /* Subtle zoom effect */
+}
+
+/* Active state styling */
+.btn-condition:active {
+    transform: scale(0.95);
+    opacity: 0.9;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    .btn-condition {
+        width: 100%;
+        text-align: center;
+    }
+
+    .condition-buttons {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+    }
+}
+
+/* Ensure buttons remain accessible on smaller screens */
+@media (max-width: 768px) {
+    .storage-option-button {
+        width: 100%; /* Full width buttons on small screens */
+        text-align: center;
+    }
 }
 
 
@@ -272,20 +451,52 @@
 
 <!-- Include AJAX script -->
 <script>
-    let selectedCondition = 'working';
-    let selectedNetwork = 'unlocked';
+    // Function to add ticks to descriptions
+    function addTickIcons(selector) {
+        const descriptionField = document.querySelector(selector);
+        if (descriptionField) {
+            const existingTickIcons = descriptionField.querySelectorAll('.ticked-icon');
+            existingTickIcons.forEach(icon => icon.remove());
 
+            const listItems = descriptionField.querySelectorAll('li');
+            listItems.forEach(item => {
+                const tickIcon = document.createElement('i');
+                tickIcon.className = 'fa fa-check ticked-icon';
+                tickIcon.style.marginRight = '5px';
+                item.insertBefore(tickIcon, item.firstChild);
+            });
+        }
+    }
+
+    let selectedCondition = '{{ product.default_condition }}';
+    let selectedNetwork = '{{ product.default_network }}';
+    let selectedStorage = '{{ default_storage }}';  // Ensure this value is correctly set
+
+    // Function to update price based on selections
     function updatePrice(condition) {
         selectedCondition = condition;
         document.getElementById('condition-display').textContent = condition.charAt(0).toUpperCase() + condition.slice(1);
-         // Show relevant description
-         if (condition === 'working') {
+        document.getElementById('condition-input').value = condition;
+
+        if (condition === 'working') {
             document.getElementById('working-description').style.display = 'block';
             document.getElementById('faulty-description').style.display = 'none';
+            addTickIcons('#working-description');
         } else if (condition === 'faulty') {
             document.getElementById('working-description').style.display = 'none';
             document.getElementById('faulty-description').style.display = 'block';
+            addTickIcons('#faulty-description');
         }
+
+        const conditionButtons = document.querySelectorAll('.btn-condition');
+        conditionButtons.forEach(btn => {
+            const tickIcon = btn.querySelector('.tick-icon');
+            if (btn.classList.contains(condition + '-btn')) {
+                tickIcon.style.display = 'inline';
+            } else {
+                tickIcon.style.display = 'none';
+            }
+        });
 
         fetchPriceUpdate();
     }
@@ -293,50 +504,113 @@
     function updateNetwork(network) {
         selectedNetwork = network;
         document.getElementById('network-display').textContent = network.toUpperCase();
+        document.getElementById('network-input').value = selectedNetwork;
+
+        const networkButtons = document.querySelectorAll('.network-btn');
+        networkButtons.forEach(btn => {
+            btn.style.border = "1px solid #ddd";
+            btn.style.backgroundColor = "#fff";
+            if (btn.alt.toLowerCase() === network) {
+                btn.style.border = "2px solid #007bff";
+                btn.style.backgroundColor = "#e0f7fa";
+            }
+        });
+
+        const networkDisplayText = document.getElementById('network-display-text');
+        networkDisplayText.textContent = `(${network.toUpperCase()})`;
+
+        fetchPriceUpdate();
+    }
+
+    function updateStorage(storageSize) {
+        selectedStorage = storageSize;
+        document.getElementById('storage-display').textContent = storageSize;
+        document.getElementById('storage-input').value = storageSize;
+
+        console.log(`Storage updated: ${storageSize}`);  // Added log to track storage updates
+
+        // Update tick icon visibility
+        const storageButtons = document.querySelectorAll('.storage-option-button');
+        storageButtons.forEach(btn => {
+            const tickIcon = btn.querySelector('.tick-icon');
+            if (btn.querySelector('.option-text').textContent === storageSize) {
+                tickIcon.style.display = 'inline';
+                btn.style.border = "2px solid #007bff"; // Highlight selected button
+                btn.style.backgroundColor = "#ff0074"; // Change background for selected
+            } else {
+                tickIcon.style.display = 'none';
+                btn.style.border = "1px solid #ddd"; // Reset border for non-selected
+                btn.style.backgroundColor = "#000000"; // Reset background
+            }
+        });
+
         fetchPriceUpdate();
     }
 
     function fetchPriceUpdate() {
-        fetch("{% url 'product_detail' pk=product.pk %}", {
+        console.log('Fetching updated price with:', {
+            condition: selectedCondition,
+            network: selectedNetwork,
+            storage_size: selectedStorage
+        });
+
+        fetch("{% url 'product_detail' product_slug=product.slug %}", {
             method: 'POST',
             body: JSON.stringify({
                 'condition': selectedCondition,
-                'network_status': selectedNetwork
+                'network': selectedNetwork,
+                'storage_size': selectedStorage
             }),
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('price-display').textContent = `£${data.updated_price}`;
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
         })
-        .catch(error => console.error('Error updating price:', error));
+        .then(data => {
+            if (data.updated_price) {
+                document.getElementById('price-display').textContent = `£${data.updated_price}`;
+                document.getElementById('price-input').value = data.updated_price;
+                document.getElementById('error-message').style.display = 'none';
+            } else {
+                throw new Error('Invalid response: missing updated_price.');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating price:', error);
+            document.getElementById('error-message').textContent = 'Unable to update price. Please try again.';
+            document.getElementById('error-message').style.display = 'block';
+        });
     }
 
+    document.addEventListener("DOMContentLoaded", () => {
+        const defaultCondition = "{{ product.default_condition|default:'working' }}";
+        const defaultNetwork = "unlocked";
+        const defaultStorage = "{{ default_storage }}";  // Ensure this default is set properly.
 
+        updatePrice(defaultCondition);
+        updateNetwork(defaultNetwork);  // Network can be updated without affecting storage selection
 
-    document.addEventListener("DOMContentLoaded", function() {
-        // Target each specific description field by ID
-        const descriptions = ['#working-description', '#faulty-description'];
-        
-        descriptions.forEach((selector) => {
-            const descriptionField = document.querySelector(selector);
-            if (descriptionField) {
-                const listItems = descriptionField.querySelectorAll('li');
-                listItems.forEach((item) => {
-                    // Create a new icon element for the tick
-                    const tickIcon = document.createElement('i');
-                    tickIcon.className = 'fa fa-check tick-icon';  // Font Awesome check icon class
+        console.log('Default storage value:', defaultStorage);  // Added log to track default storage
 
-                    // Insert the tick icon at the beginning of each list item
-                    item.insertBefore(tickIcon, item.firstChild);
-                });
-            }
-        });
+        // Default storage selection logic
+        const storageButtons = document.querySelectorAll('.storage-option-button');
+        const defaultStorageButton = [...storageButtons].find(btn => 
+            btn.querySelector('.option-text').textContent.trim() === defaultStorage
+        );
+
+        if (defaultStorageButton) {
+            const size = defaultStorageButton.querySelector('.option-text').textContent.trim();
+            updateStorage(size);  // Make sure storage is selected independently of network
+        }
     });
 </script>
+
 
 
 

@@ -5,10 +5,10 @@
 <!-- Category Section -->
 <section class="category-products-section py-5">
   <div class="container">
-    <h2 class="text-center mb-4">{{ category.name }} - Products</h2>
+    <h2 class="text-center mb-4">{{ category.name }}</h2>
     
     <!-- Filter Options Form -->
-    <form method="get" class="filters-form mb-4" action="{% url 'category_products' category.id %}">
+    <form method="get" class="filters-form mb-4" action="{% url 'category_products' category_slug=category.slug %}">
       <div class="row">
         <!-- Filter by Brand -->
         <div class="col-md-6 mb-3">
@@ -43,7 +43,7 @@
       {% for product in products %}
         <div class="col-md-4 mb-4">
           <!-- Correct URL for product detail page -->
-          <a href="{% url 'product_detail' product.id %}" class="product-link">
+          <a href="{% url 'product_detail' product_slug=product.slug  %}" class="product-link">
             <div class="card shadow-sm rounded-lg border-0">
               <div class="card-img-container">
                 {% if product.image %}
