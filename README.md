@@ -141,7 +141,7 @@ The site was developed with a responsive design, ensuring usability across deskt
 
 # UX/UI Design  
 
-### Wireframes  
+### Mockups  
 
 **Desktop Design**  
 [Home Page Design](wireframes/Desktop-Mock-Up.jpg)  
