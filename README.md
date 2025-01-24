@@ -56,13 +56,17 @@ The site was developed with a responsive design, ensuring usability across deskt
 ### Customer Stories  
 
 1. **Search Functionality**: As a customer, I want to search for my gadget quickly so I can start the selling process efficiently.  
-2. **Dynamic Pricing**: As a customer, I want to see prices update dynamically based on the condition and storage size, enabling me to make an informed decision.  
-3. **Order History**: As a customer, I want access to my order history and the ability to reprint postage labels for convenience.  
+2. **Dynamic Pricing**: As a customer, I want to see prices update dynamically based on the condition and storage size, enabling me to make an informed decision.
+3. **Easy Checkout:**  As a customer, I want a quick and simple checkout process so that I can complete my sale with minimal effort.
+4. **Order History**: As a customer, I want access to my order history and the ability to reprint postage labels for convenience.
+5. **Multiple Payment Options:** As a customer, I want to choose from various payment methods (e.g., PayPal, bank transfer) to complete my transaction in the way that works best for me.
+6. **Notifications and Updates:**  *As a customer, I want to receive notifications about the status of my sale (e.g., gadget received, payment processed) so I’m always informed.*
 
 ### Site Owner Stories  
 
-1. **Product Management**: As a site owner, I want to manage products, categories, and storage options to cater to a wide variety of devices.  
-2. **Revised Offers**: As a site owner, I want to send custom revised offers with explanations to maintain transparency and resolve issues efficiently.  
+1. **Product Management**: As a site owner, I want to manage products, categories, and storage options to cater to a wide variety of devices.
+2. **Order Management:**   As a site owner, I want to view, manage, and process customer orders so that I can efficiently handle multiple sales at once. 
+3. **Revised Offers**: As a site owner, I want to send custom revised offers with explanations to maintain transparency and resolve issues efficiently.  
 
 ---
 
