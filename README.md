@@ -55,7 +55,7 @@ The site was developed with a responsive design, ensuring usability across deskt
 
 ### Customer Stories  
 
-1. **Search Functionality**: **As a customer**, I want to search for my gadget quickly so I can start the selling process efficiently.  
+1. **Search Functionality**: -  **As a customer**, I want to search for my gadget quickly so I can start the selling process efficiently.  
 2. **Dynamic Pricing**: **As a customer**, I want to see prices update dynamically based on the condition and storage size, enabling me to make an informed decision.
 3. **Easy Checkout:**  **As a customer**, I want a quick and simple checkout process so that I can complete my sale with minimal effort.
 4. **Order History**: **As a customer**, I want access to my order history and the ability to reprint postage labels for convenience.
