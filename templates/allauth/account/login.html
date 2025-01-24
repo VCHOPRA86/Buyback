@@ -66,6 +66,11 @@
             <h1 class="mb-4">Account Login</h1>
             <form class="w-100" style="max-width: 300px;" method="post" action="{% url 'account_login' %}">
                 {% csrf_token %}
+                <!-- Preserve the 'next' parameter -->
+                {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+    {% endif %}
+
                 <!-- Username Field -->
                 <div class="mb-3">
                     <input type="text" class="form-control" placeholder="Username" name="login" required>
