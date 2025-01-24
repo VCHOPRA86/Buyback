@@ -141,13 +141,61 @@ The site was developed with a responsive design, ensuring usability across deskt
 
 # UX/UI Design  
 
-### Mockups  
+## Mockups  
 
-**Desktop Design**  
-[Home Page Design](wireframes/Desktop-Mock-Up.jpg)  
+### Desktop Design
 
-**Mobile Design**  
-[Home Page Design](wireframes/Mobile-Mock-Up.jpg)  
+#### General Pages:
+- [Home Page Design](wireframes/Desktop-Mock-Up.jpg)
+- [Sell My Gadgets](wireframes/Desktop-Mock-Up.jpg)  
+- [How It Works](wireframes/Desktop-Mock-Up.jpg)  
+- [Why Use Us](wireframes/Desktop-Mock-Up.jpg)  
+- [Support](wireframes/Desktop-Mock-Up.jpg)
+- [Contact Us](wireframes/Desktop-Mock-Up.jpg)
+
+#### Authentication Pages:
+- [Login](wireframes/Desktop-Mock-Up.jpg)
+- [Signup](wireframes/Desktop-Mock-Up.jpg)
+
+#### Checkout Flow:
+- [Cart](wireframes/Desktop-Mock-Up.jpg)
+- [Checkout](wireframes/Desktop-Mock-Up.jpg)
+- [Checkout Success - Paid Postage Option](wireframes/Desktop-Mock-Up.jpg)
+- [Checkout Success - Prepaid Postage Option](wireframes/Desktop-Mock-Up.jpg)
+
+#### User Dashboard:
+- [User Dashboard](wireframes/Desktop-Mock-Up.jpg)
+- [User Edit Details](wireframes/Desktop-Mock-Up.jpg)
+- [User Order Details](wireframes/Desktop-Mock-Up.jpg)
+- [User Password Change](wireframes/Desktop-Mock-Up.jpg)
+
+---
+
+### Mobile Design
+
+#### General Pages:
+- [Home Page Design](wireframes/Desktop-Mock-Up.jpg)
+- [Sell My Gadgets](wireframes/Desktop-Mock-Up.jpg)  
+- [How It Works](wireframes/Desktop-Mock-Up.jpg)  
+- [Why Use Us](wireframes/Desktop-Mock-Up.jpg)  
+- [Support](wireframes/Desktop-Mock-Up.jpg)
+- [Contact Us](wireframes/Desktop-Mock-Up.jpg)
+
+#### Authentication Pages:
+- [Login](wireframes/Desktop-Mock-Up.jpg)
+- [Signup](wireframes/Desktop-Mock-Up.jpg)
+
+#### Checkout Flow:
+- [Cart](wireframes/Desktop-Mock-Up.jpg)
+- [Checkout](wireframes/Desktop-Mock-Up.jpg)
+- [Checkout Success - Paid Postage Option](wireframes/Desktop-Mock-Up.jpg)
+- [Checkout Success - Prepaid Postage Option](wireframes/Desktop-Mock-Up.jpg)
+
+#### User Dashboard:
+- [User Dashboard](wireframes/Desktop-Mock-Up.jpg)
+- [User Edit Details](wireframes/Desktop-Mock-Up.jpg)
+- [User Order Details](wireframes/Desktop-Mock-Up.jpg)
+- [User Password Change](wireframes/Desktop-Mock-Up.jpg)
 
 ---
 
