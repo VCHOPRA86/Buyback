@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from checkout.models import Order, OrderItem
 from django.contrib import messages
+from django.urls import reverse
 from django.http import JsonResponse
 from .models import Cart
 from products.models import Product
@@ -10,7 +11,7 @@ from django.db.models import Sum
 
 logger = logging.getLogger(__name__)
 
-@login_required
+
 def add_to_cart(request, product_slug):
     if request.method == "POST":
         # Fetch the product using the slug
@@ -29,21 +30,40 @@ def add_to_cart(request, product_slug):
             messages.error(request, "Network is required for phones and tablets.")
             return redirect('product_detail', product_slug=product_slug)
 
-        # Create a new Cart entry
-        Cart.objects.create(
-            user=request.user,  # Associate the cart item with the current user
-            product_name=product_name,
-            condition=condition,
-            network=network,
-            value=value,
-            storage_size=storage_size
-        )
+        # Check if the user is authenticated
+        if request.user.is_authenticated:
+            # Save to the database if the user is logged in
+            Cart.objects.create(
+                user=request.user,
+                product_name=product_name,
+                condition=condition,
+                network=network,
+                value=value,
+                storage_size=storage_size,
+            )
 
-        # Update session cart count
-        cart_count = Cart.objects.filter(user=request.user).count()
-        request.session['cart_count'] = cart_count
+            # Update session cart count
+            cart_count = Cart.objects.filter(user=request.user).count()
+            request.session['cart_count'] = cart_count
+            return redirect('revieworder:revieworder')
+        else:
+            # Save the cart item to the session for unauthenticated users
+            cart_item = {
+                'product_name': product_name,
+                'condition': condition,
+                'network': network,
+                'value': value,
+                'storage_size': storage_size,
+            }
+            cart = request.session.get('cart', [])
+            cart.append(cart_item)
+            request.session['cart'] = cart
+            request.session.modified = True  # Mark the session as modified to save changes
 
-        return redirect('revieworder:revieworder')
+        # Redirect to login with 'next' parameter to go back to cart page after login
+            login_url = f"{reverse('account_login')}?next={reverse('revieworder:revieworder')}"
+            return redirect(f'{login_url}?next={request.path}')
+        
 
     return redirect('product_detail', product_slug=product_slug)
 
