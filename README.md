@@ -19,7 +19,7 @@
 The primary goal of **CashThatGadget** is to create a user-friendly platform that simplifies the process of selling used gadgets. By offering competitive pricing, advanced features, and intuitive tools, the platform seeks to foster customer trust while enabling scalable business growth.
 
 The repository containing the website's source code and assets is available at:  
-[Code Repository](https://github.com/VCHOPRA86/ExchangioExchange-milestone-project-two)
+[Code Repository]()
 
 The site was developed with a responsive design, ensuring usability across desktop, tablet, and mobile devices.  
 **Preview Example:**  
