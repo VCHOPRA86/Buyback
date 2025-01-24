@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from settings.models import GlobalSettings 
 from django.db import transaction
+from django.template import Template, Context
 from email_templates.models import EmailTemplate
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -69,11 +70,24 @@ def send_order_status_email(order):
 
     if email_template:
         subject = email_template.subject
-        body = email_template.body.format(
-            full_name=order.full_name,
-            order_number=order.order_number,
-            total_price=order.total_price,
-        )
+
+        # Fetch all items for the order
+        order_items = order.items.all()
+
+        # Prepare the context for rendering the email
+        context = {
+            'full_name': order.full_name,
+            'order_number': order.order_number,
+            'order_items': order_items, 
+            'total_price': order.total_price,
+            'order_status': order.status,  # If needed in the template
+        }
+
+
+        # Render the email body dynamically
+        template = Template(email_template.description)
+        body = template.render(Context(context))
+
 
         send_mail(
             subject,
@@ -81,6 +95,7 @@ def send_order_status_email(order):
             settings.DEFAULT_FROM_EMAIL,
             [order.email],
             fail_silently=False,
+            html_message=body,  # This makes the body render as HTML
         )
 
 # Utility function to create a shipment with ShipEngine
