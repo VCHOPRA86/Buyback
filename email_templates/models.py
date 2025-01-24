@@ -1,6 +1,7 @@
 # email_templates/models.py
 from django.db import models
 from django.apps import apps 
+from ckeditor.fields import RichTextField 
 from checkout.constants import STATUS_CHOICES
 
 
@@ -15,7 +16,7 @@ class OrderStatus(models.Model):
 class EmailTemplate(models.Model):
     order_status = models.CharField(max_length=20, choices=STATUS_CHOICES, verbose_name="Order Status")
     subject = models.CharField(max_length=255)
-    body = models.TextField()
+    description = RichTextField(blank=True, null=True)  # Replace body with RichTextField and rename to description
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
