@@ -125,16 +125,11 @@ Automated tests were written for core functionalities like registration, posting
 
 * I had to disable email verification to allow my tests that required log in to work.
 
-## Peer Review
-The website was peer-reviewed by another developer to ensure code quality, usability, and adherence to industry standards. Feedback was incorporated, improving the overall quality.
-
 ## Bugs
 
 ### Resolved
-- Fixed a minor issue where the mobile menu would not display correctly on some screen sizes.
-- Corrected a bug where the checkout page was not refreshing correctly after submitting a sale.
 
 ### Unresolved
-- **Potential issue with Internet Explorer 11**: There may be minor UI glitches due to lack of support for modern CSS features. This is under review.
+
 
 
