@@ -3,7 +3,6 @@
 
 The CashThatGadget website has been tested using the following methods:
 
-The Gather recipe website has been tested using the following methods:
 - [Code Validation](#code-validation)
     - [W3C HTML Validator](#w3c-html-validator) 
     - [W3C CSS Validator](#w3c-css-validator)
