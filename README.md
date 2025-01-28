@@ -156,7 +156,7 @@ The site was developed with a responsive design, ensuring usability across deskt
 ### Desktop Design
 
 #### General Pages:
-- [Home Page Design](ui/ux/Homepaqge.png)
+- [Home Page Design](ui/ux/Homepage.png)
 - [Sell My Gadgets](wireframes/Desktop-Mock-Up.jpg)  
 - [How It Works](wireframes/Desktop-Mock-Up.jpg)  
 - [Why Use Us](wireframes/Desktop-Mock-Up.jpg)  
