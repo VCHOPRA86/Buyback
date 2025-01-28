@@ -157,27 +157,27 @@ The site was developed with a responsive design, ensuring usability across deskt
 
 #### General Pages:
 - [Home Page Design](ui/ux/Homepage.png)
-- [Sell My Gadgets](wireframes/Desktop-Mock-Up.jpg)  
-- [How It Works](wireframes/Desktop-Mock-Up.jpg)  
-- [Why Use Us](wireframes/Desktop-Mock-Up.jpg)  
-- [Support](wireframes/Desktop-Mock-Up.jpg)
-- [Contact Us](wireframes/Desktop-Mock-Up.jpg)
+- [Sell My Gadgets](ui/ux/Sell_mobile-gadget.png)  
+- [How It Works](ui/ux/How_it_works.png)  
+- [Why Use Us](ui/ux/Why_use_us.png)  
+- [Support](ui/ux/Support.png)
+- [Contact Us](ui/ux/Contact.png)
 
 #### Authentication Pages:
-- [Login](wireframes/Desktop-Mock-Up.jpg)
-- [Signup](wireframes/Desktop-Mock-Up.jpg)
+- [Login](ui/ux/login.png)
+- [Signup](ui/ux/signup.png)
 
 #### Checkout Flow:
-- [Cart](wireframes/Desktop-Mock-Up.jpg)
-- [Checkout](wireframes/Desktop-Mock-Up.jpg)
-- [Checkout Success - Paid Postage Option](wireframes/Desktop-Mock-Up.jpg)
-- [Checkout Success - Prepaid Postage Option](wireframes/Desktop-Mock-Up.jpg)
+- [Cart](ui/ux/Checkout_flow/Review-cart-sale.png)
+- [Checkout](ui/ux/Checkout_flow/Confirm_sale.png)
+- [Checkout Success - Paid Postage Option](ui/ux/Checkout_flow/checkout-success-paid-postage-option.png)
+- [Checkout Success - Prepaid Postage Option](ui/ux/Checkout_flow/checkout-success-prepaid-postage-option.png)
 
 #### User Dashboard:
-- [User Dashboard](wireframes/Desktop-Mock-Up.jpg)
-- [User Edit Details](wireframes/Desktop-Mock-Up.jpg)
-- [User Order Details](wireframes/Desktop-Mock-Up.jpg)
-- [User Password Change](wireframes/Desktop-Mock-Up.jpg)
+- [User Dashboard](ui/ux/User_account_dashboard/User-Dashboard.png)
+- [User Edit Details](ui/ux/User_account_dashboard/User-edit-details.png)
+- [User Order Details](ui/ux/User_account_dashboard/User-order-details.png)
+- [User Password Change](ui/ux/User_account_dashboard/User-password-change.png)
 
 ---
 
