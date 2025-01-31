@@ -22,6 +22,11 @@
   .popular-devices-section.popular-items-middle .swiper-container .swiper-wrapper .swiper-slide {
     width: 200px !important;
   }
+
+    button#clear-button2 {
+
+    display: none;
+  }
 }
 
 @media all and (max-width: 1024px) {
@@ -330,15 +335,58 @@
   }
 }
 
-@media all and (max-width: 676px) {
+@media (max-width: 676px) {
+  .search-form-top {
+      position: fixed;
+      right: 25px;
+      top: 106px;
+      left: 25px;
+      width: calc(100% - 50px); /* Adjusting width based on left and right padding */
+      z-index: 1000; /* Ensures it stays above other elements */
+      box-sizing: border-box; /* Ensures padding is included in the width calculation */
+  }
 
-.search-form-top {
-  position: fixed;
-  right: 50px;
-  top: 106px;
-  display: none;
-  left: 50px;
+  .search-form-top .input-group .input-group-append .input-group-text {
+    cursor: pointer;
+    padding: 15px 28px;
+    background-color: #000;
+    border: 2px solid #3a3336;
 }
 
+.input-group>.input-group-append>.btn,
+
+  .input-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.input-group input {
+    width: 100%;
+    padding-right: 35px; /* Space for the clear button */
+}
+
+.input-group-append {
+    display: flex;
+    align-items: center;
+}
+
+.input-group-append button {
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+button#clear-button2 {
+
+    right: 10px;
+    top: 50%;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin: 0;
+    font-size: 16px;
+    color: #000; 
+  }
 }
 /*# sourceMappingURL=mediaqueries.css.map */
