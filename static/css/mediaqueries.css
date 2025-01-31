@@ -329,4 +329,16 @@
     font-size: 26px;
   }
 }
+
+@media all and (max-width: 676px) {
+
+.search-form-top {
+  position: fixed;
+  right: 50px;
+  top: 106px;
+  display: none;
+  left: 50px;
+}
+
+}
 /*# sourceMappingURL=mediaqueries.css.map */
