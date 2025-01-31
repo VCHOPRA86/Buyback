@@ -1,0 +1,501 @@
+/* Signup Form */
+
+.btn-pink {
+    background-color: #ff0066;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pink:hover {
+    background-color: #e6005c;
+}
+
+.bg-pink {
+    background-color: #ff0066;
+}
+
+.help-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-form input, 
+.custom-form select, 
+.custom-form textarea {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.custom-form input:focus, 
+.custom-form select:focus, 
+.custom-form textarea:focus {
+    border-color: #ff0066;
+    box-shadow: 0 0 0 0.25rem rgba(255, 0, 102, 0.541);
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-check-label {
+    margin: 0;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.form-check input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+/* Modal Styling */
+#contentModal .modal-dialog {
+max-width: 800px; /* Set maximum width for the modal */
+margin: 30px auto;
+}
+
+#contentModal .modal-header {
+background-color: #ff0066; /* Header background color */
+color: white; /* Header text color */
+border-bottom: 2px solid #000000; /* Subtle border */
+padding: 15px;
+font-size: 1.5rem; /* Header text size */
+}
+
+#contentModal .modal-body {
+padding: 20px;
+max-height: 70vh; /* Limit the height of the modal body */
+overflow-y: auto; /* Enable scrolling for long content */
+font-family: 'Arial', sans-serif; /* Readable font */
+font-size: 1rem; /* Base font size */
+line-height: 1.6; /* Improve text readability */
+color: #333; /* Text color */
+}
+
+#contentModal .modal-footer {
+padding: 15px;
+text-align: right;
+background-color: #f8f9fa; /* Light footer background */
+border-top: 1px solid #ddd; /* Subtle top border */
+}
+
+/* Content Styling */
+#contentModal .modal-body h1,
+#contentModal .modal-body h2 {
+color: #ff0066; /* Match header color */
+margin-bottom: 1rem;
+border-bottom: 2px solid #ff0066;
+padding-bottom: 0.5rem;
+}
+
+#contentModal .modal-body p {
+margin-bottom: 1rem;
+color: #444; /* Slightly lighter text for paragraphs */
+}
+
+#contentModal .modal-body ul {
+margin-bottom: 1.5rem;
+}
+
+#contentModal .modal-body a {
+color: #0056b3;
+text-decoration: underline;
+}
+
+#contentModal .modal-body a:hover {
+color: #004080;
+text-decoration: none;
+}
+
+/* Button Styling */
+#contentModal .modal-footer button {
+background-color: #0056b3; /* Primary button background */
+color: white;
+border: none;
+padding: 10px 20px;
+font-size: 1rem;
+border-radius: 5px;
+cursor: pointer;
+}
+
+#contentModal .modal-footer button:hover {
+background-color: #004080; /* Darker shade on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+#contentModal .modal-dialog {
+    max-width: 90%; /* Adjust modal width for smaller screens */
+}
+
+#contentModal .modal-header {
+    font-size: 1.25rem; /* Smaller header text */
+}
+
+#contentModal .modal-body {
+    font-size: 0.9rem; /* Adjust font size */
+}
+}
+
+/* Signup form end */
+
+
+/* Login Form */
+
+.login-section {
+    background-color: #333;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+
+  form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  button {
+    background-color: #ff0066;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  button:hover {
+    background-color: #e6005c;
+  }
+
+  .forgot-password {
+    text-align: center;
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 12px;
+  }
+
+  .forgot-password:hover {
+    color: #fff;
+  }
+
+  .register-section {
+    flex: 1;
+    background-color: #ff0066;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  h2.mb-4.register-section.p {
+    margin-top: 25px;
+  }
+
+  .register-section p {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+
+  .register-section a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .register-section a:hover {
+    text-decoration: underline;
+  }
+
+  .image-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .image-section img {
+    height: auto;
+    border-radius: 10px;
+  }
+
+
+
+  /* Styling for error messages */
+.alert-error {
+    
+    color: #721c24;
+  
+    padding: 15px;
+    border-radius: 5px;
+    position: relative;
+    margin-bottom: 15px;
+    width: 50%;
+}
+
+/* Close button styling */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    color: #721c24;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Error field styling */
+.error-field {
+    margin-bottom: 10px;
+}
+
+/* Error list styling */
+.error-list {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.error-list li {
+    font-size: 14px;
+}
+
+/* Non-field errors styling */
+.non-field-errors {
+    margin-top: 10px;
+}
+
+.error-message {
+    padding: 10px;
+    color: #721c24;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+/* Styling for close button hover effect */
+.close-button:hover {
+    color: #f1f1f1;
+}
+
+
+/** Login Form End */
+
+/* Password Reset Form */
+
+/* Password Reset Wrapper */
+.password-reset-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Title Styling */
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Instruction Text */
+.text-muted {
+    font-size: 1rem;
+    color: #bbb !important;
+}
+
+
+
+form input[type="email"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+form button {
+    background-color: #ff0066;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+form button:hover {
+    background-color: #e6005c;
+    transform: scale(1.05);
+}
+
+.btn-pink {
+    color: #ffffff;
+    background: #000000;
+
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .password-reset-wrapper {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    form {
+        padding: 15px;
+    }
+}
+
+/* Password Reset Form End */
+
+/* Profile Password change Form */
+
+/* General tab styling */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 0;
+    list-style-type: none;
+}
+
+h1.text-center.mb-4 {
+
+    color: #000000;
+
+}
+.tab-link {
+    text-decoration: none;
+    padding: 12px 24px;
+    border-bottom: 2px solid transparent;
+    color: #333;
+    font-weight: bold;
+    margin-right: 20px;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.tab-link:hover {
+    color: #d63384;
+}
+
+.tab-link.active {
+    color: #d63384;
+    border-bottom: 2px solid #d63384;
+}
+
+/* Form styling */
+.password-change-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.password-change-form fieldset {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.password-change-form .fieldset-legend {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Input and Button Styling */
+.password-change-form input, .password-change-form select, .password-change-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.password-change-form input::placeholder, .password-change-form textarea::placeholder {
+    color: #aaa;
+}
+
+.password-change-form .submit-btn {
+    padding: 12px 24px;
+    background-color: #d63384;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.password-change-form .submit-btn:hover {
+    background-color: #c02472;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab-link {
+        margin-bottom: 10px;
+    }
+
+    .password-change-form {
+        width: 100%;
+        padding: 0 20px;
+    }
+}
+/* Profile Password change Form End */
