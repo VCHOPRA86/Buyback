@@ -141,11 +141,14 @@
 			  </li>  
       </ul>
       <form action="{% url 'search_results' %}" method="get" class="search-form2 search-form-top" id="search-form2">
+        <button type="button" class="input-group-text btn btn-secondary" id="clear-button2" onclick="toggleSearchBox('close')">
+        <i class="fa fa-times"></i> <!-- Font Awesome "times" icon for the cross -->
+    </button>
         <div class="input-group">
             <input name="search" id="search-input2" class="form-control" placeholder="Enter your model" autocomplete="off" type="text">
             <div class="input-group-append">
                 <button type="submit" class="input-group-text btn btn-primary" id="search-button2">
-                    <img src="{% static 'images/search.png' %}" alt="search">
+                    <img src="{% static 'images/search.png' %}" alt="search" onclick="toggleSearchBox()">
                 </button>
             </div>
         </div>
@@ -329,6 +332,22 @@
 }
 
   </style>
+<script>
+  function toggleSearchBox(action) {
+    const searchForm = document.getElementById('search-form2');
+    const openButton = document.getElementById('open-search-button');
+    
+    if (action === 'open') {
+        searchForm.style.display = 'block';  // Show the search form
+        openButton.style.display = 'none';   // Hide the reopen button when open
+    } else if (action === 'close') {
+        searchForm.style.display = 'none';   // Hide the search form
+        openButton.style.display = 'inline-block'; // Show the reopen button when closed
+    }
+}
+
+</script>
+	  
 
 
   
