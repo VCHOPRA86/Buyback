@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+from dotenv import load_dotenv
 import environ
 
 # Initialize environment variables
@@ -27,11 +28,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+load_dotenv()
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', '')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -209,18 +212,15 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
-if 'DEVELOPMENT' in os.environ:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = ''
-else:
-    EMAIL_HOST = "smtp.gmail.com"  # Use your email provider's SMTP server
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER') 
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-    
-    DEFAULT_FROM_EMAIL = "EMAIL_HOST_USER"
-    ADMIN_EMAIL = "os.environ.get('EMAIL_HOST_USER')"  # Set this to the admin's
+
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS') == 'True'
+
+DEFAULT_FROM_EMAIL = "EMAIL_HOST_USER"
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
 
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
@@ -237,7 +237,7 @@ LOGIN_REDIRECT_URL = '/profile/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 
-SHIPENGINE_API_KEY = 'TEST_g3XcGUa7H190dWqdPQjIQyxu4w44TlxJfqjpuy8Tye8'
+SHIPENGINE_API_KEY = os.getenv('IPENGINE_API_KEY')
 
 
 APPEND_SLASH = True
