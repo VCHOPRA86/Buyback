@@ -22,7 +22,7 @@
                         <div class="col-md-4 mb-4">
                             <div class="card">
                                 <a href="{% url 'product_detail' product_slug=product.slug %}" class="text-decoration-none">
-                                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default-image.png' %}{% endif %}" alt="{{ product.name }}" class="product-img mx-auto d-block" width="70px">
+                                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default-image.png' %}{% endif %}" alt="{{ product.name }}" class="product-img mx-auto d-block">
 
 
                                     <div class="card-body">
