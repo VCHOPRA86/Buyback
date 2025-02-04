@@ -71,7 +71,7 @@ The site was developed with a responsive design, ensuring usability across deskt
 5. **Counter Offer Functionality**: - **As a site owner**, I want an easy-to-use admin interface for sending counter offers to customers, allowing me to adjust offers based on device condition and market trends, ensuring fair negotiations.
 6. **Revised Offers**: - **As a site owner**, I want to send custom revised offers with explanations to maintain transparency and resolve issues efficiently.
 7. **Maintenance Page**: - **As a site owner**, I want a dedicated maintenance page so I can easily make changes, updates, or perform site maintenance without disrupting user experience.
-8.  **Prepaid Postage Option**: - **As a site owner**, I want to have the option of either offering a free prepaid postage option or require the customer to pay for postage, depending on the business, to help keep costs down when setting up a free postage service, providing flexibility in my services.
+8.  **Prepaid Postage / Seller-Paid Postage Option**: - **As a site owner**, I want to have the option of either offering a free prepaid postage option or require the customer to pay for postage, depending on the business, to help keep costs down when setting up a free postage service, providing flexibility in my services.
 9.  **Order History Overview:** **As a site owner**, I want to quickly view a comprehensive overview of all customer orders, including status, values, and any actions taken, to monitor platform performance efficiently.
 
 ---
