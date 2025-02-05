@@ -248,7 +248,7 @@ Instructions on local and live deployment can be found in the full documentation
 # Credits  
 
 ### Content  
-All content was written and developed by the project creator.  
+All content was written and developed by me.
 
 ### Code  
 Resources for inspiration and debugging include:  
