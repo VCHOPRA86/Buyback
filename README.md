@@ -222,7 +222,9 @@ The site was developed with a responsive design, ensuring usability across deskt
 
 - [Django](https://www.djangoproject.com/): Backend framework for building the platform.  
 - [CKEditor](https://ckeditor.com/): Rich text editor for email and product description customization.  
-- [Jazzmin](https://django-jazzmin.readthedocs.io/): Enhances admin UI with modern styling.  
+- [Jazzmin](https://django-jazzmin.readthedocs.io/): Enhances admin UI with modern styling.
+- [Whitenoise](https://whitenoise.readthedocs.io/en/stable/django.html):Serves static files directly in production without requiring a separate web server.    
+  
 
 ## APIs Used  
 
