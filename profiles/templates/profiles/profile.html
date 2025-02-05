@@ -36,7 +36,7 @@
                     </button>
                     {% endif %}
                     <!-- Print Label Button -->
-                     {% if order.paid_by_sender %}
+                     {% if order.postage_option == "paid_by_sender" %}
                     <button onclick="printLabel('{{ order.order_number }}')" class="btn print-label-btn">
                         Print Label
                     </button>
