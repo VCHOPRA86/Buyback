@@ -226,7 +226,8 @@ The site was developed with a responsive design, ensuring usability across deskt
 
 ## APIs Used  
 
-- [ShipEngine](https://www.shipengine.com/): Prepaid postage label integration.  
+- [ShipEngine](https://www.shipengine.com/): Prepaid postage label integration.
+- [Cloudinary](https://cloudinary.com/): Manages and delivers media assets with automatic optimization, ensuring fast loading times and scalable performance. 
 
 ---
 
