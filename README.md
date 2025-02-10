@@ -184,28 +184,27 @@ The site was developed with a responsive design, ensuring usability across deskt
 ### Mobile Design
 
 #### General Pages:
-- [Home Page Design](wireframes/Desktop-Mock-Up.jpg)
-- [Sell My Gadgets](wireframes/Desktop-Mock-Up.jpg)  
-- [How It Works](wireframes/Desktop-Mock-Up.jpg)  
-- [Why Use Us](wireframes/Desktop-Mock-Up.jpg)  
-- [Support](wireframes/Desktop-Mock-Up.jpg)
-- [Contact Us](wireframes/Desktop-Mock-Up.jpg)
+- [Home Page Design](ui/ux/mobile/Homepage.png)
+- [Sell My Gadgets](ui/ux/mobile/Sell_mobile-gadget.png)  
+- [How It Works](ui/ux/mobile/How_it_works.png)  
+- [Why Use Us](ui/ux/mobile/Why_use_us.png)  
+- [Support](ui/ux/mobile/Support.png)
+- [Contact Us](ui/ux/mobile/Contact.png)
 
 #### Authentication Pages:
-- [Login](wireframes/Desktop-Mock-Up.jpg)
-- [Signup](wireframes/Desktop-Mock-Up.jpg)
+- [Login](ui/ux/mobile/login.png)
+- [Signup](ui/ux/mobile/signup.png)
 
 #### Checkout Flow:
-- [Cart](wireframes/Desktop-Mock-Up.jpg)
-- [Checkout](wireframes/Desktop-Mock-Up.jpg)
-- [Checkout Success - Paid Postage Option](wireframes/Desktop-Mock-Up.jpg)
-- [Checkout Success - Prepaid Postage Option](wireframes/Desktop-Mock-Up.jpg)
+- [Cart](ui/ux/mobile/Checkout_flow/Review-cart-sale.png)
+- [Checkout](ui/ux/mobile/Checkout_flow/Confirm_sale.png)
+- [Checkout Success - Paid Postage Option](ui/ux/mobile/Checkout_flow/checkout-success-paid-postage-option.png)
+- [Checkout Success - Prepaid Postage Option](ui/ux/mobile/Checkout_flow/checkout-success-prepaid-postage-option.png)
 
 #### User Dashboard:
-- [User Dashboard](wireframes/Desktop-Mock-Up.jpg)
-- [User Edit Details](wireframes/Desktop-Mock-Up.jpg)
-- [User Order Details](wireframes/Desktop-Mock-Up.jpg)
-- [User Password Change](wireframes/Desktop-Mock-Up.jpg)
+- [User Dashboard](ui/ux/mobile/User_account_dashboard/User-Dashboard.png)
+- [User Edit Details](ui/ux/mobile/User_account_dashboard/User-edit-details.png)
+- [User Password Change](ui/ux/mobile/User_account_dashboard/User-password-change.png)
 
 ---
 
