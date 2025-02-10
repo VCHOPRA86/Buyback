@@ -1,3 +1,5 @@
+setuptools>=65.0.0
+django-cloudinary-storage
 aiohappyeyeballs==2.4.4
 aiohttp==3.10.11
 aiosignal==1.3.1
@@ -11,8 +13,9 @@ charset-normalizer==3.4.0
 crispy-bootstrap4==2022.1
 dataclasses-json==0.5.14
 defusedxml==0.7.1
+dj-database-url==0.5.0
 Django==3.2
-django-allauth==0.41.0
+django-allauth>=0.44.0 
 django-ckeditor==6.7.1
 django-crispy-forms==1.14.0
 django-debug-toolbar==3.2
@@ -24,6 +27,7 @@ docopt==0.6.2
 dunamai==1.23.0
 frozenlist==1.5.0
 fuuid==0.1.0
+gunicorn==23.0.0
 idna==3.10
 Jinja2==3.1.5
 jsonpath-python==1.0.6
@@ -37,6 +41,7 @@ pillow==10.4.0
 pipreqs==0.4.13
 poetry-dynamic-versioning==0.13.1
 propcache==0.2.0
+psycopg2==2.9.10
 python-dateutil==2.9.0.post0
 python-dotenv==0.15.0
 python3-openid==3.2.0
@@ -51,5 +56,6 @@ typing-inspect==0.9.0
 typing_extensions==4.12.2
 tzdata==2024.2
 urllib3==2.2.3
+whitenoise==6.7.0
 yarg==0.1.10
 yarl==1.15.2
