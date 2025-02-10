@@ -185,7 +185,7 @@ The site was developed with a responsive design, ensuring usability across deskt
 
 #### General Pages:
 - [Home Page Design](ui/ux/mobile/Homepage.png)
-- [Sell My Gadgets](ui/ux/mobile/Sell_mobile-gadget.png)  
+- [Sell My Gadgets](ui/ux/mobile/Sell_my_gadget.png)  
 - [How It Works](ui/ux/mobile/How_it_works.png)  
 - [Why Use Us](ui/ux/mobile/Why_use_us.png)  
 - [Support](ui/ux/mobile/Support.png)
