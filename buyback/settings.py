@@ -10,14 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import dj_database_url
 from dotenv import load_dotenv
 import environ
+
 
 # Initialize environment variables
 env = environ.Env()
 environ.Env.read_env()  # This reads the .env file
-
-
 
 from pathlib import Path
 
@@ -34,9 +34,9 @@ load_dotenv()
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['cashthatgadget-6181349c7e0a.herokuapp.com', 'localhost']
 
 
 
@@ -68,8 +68,10 @@ INSTALLED_APPS = [
     'settings',
     'email_templates',
     'environ',
+    'cloudinary',
+    'cloudinary_storage',
     
-
+    
 ]
 
 
@@ -104,16 +106,18 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'debug.log',
+        'console': {
+            'class': 'logging.StreamHandler',
         },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'ERROR',
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
+            'handlers': ['console'],
+            'level': 'ERROR',
             'propagate': True,
         },
     },
@@ -121,22 +125,26 @@ LOGGING = {
 
 
 
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',  
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'settings.middleware.SettingsMiddleware',
-    # other middleware
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
+    'settings.middleware.SettingsMiddleware',  # Temporarily comment this out to test
+
+    
 ]
 
-INTERNAL_IPS = ['127.0.0.1']
+if DEBUG:
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+
+INTERNAL_IPS = ['127.0.0.1',]
 
 ROOT_URLCONF = 'buyback.urls'
 
@@ -198,10 +206,6 @@ JAZZMIN_SETTINGS = {
 
 
 
-
-
-
-
 AUTHENTICATION_BACKENDS = (
 
     'django.contrib.auth.backends.ModelBackend',
@@ -232,12 +236,12 @@ LOGIN_URL = '/accounts/login/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-ACCOUNT_SIGNUP_REDIRECT_URL = '/profiles/'
+ACCOUNT_SIGNUP_REDIRECT_URL = '/profile/'
 LOGIN_REDIRECT_URL = '/profile/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 
-SHIPENGINE_API_KEY = os.getenv('IPENGINE_API_KEY')
+SHIPENGINE_API_KEY = os.getenv('SHIPENGINE_API_KEY')
 
 
 APPEND_SLASH = True
@@ -248,19 +252,14 @@ WSGI_APPLICATION = 'buyback.wsgi.application'
 
 
 
-
-
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+     'default': dj_database_url.parse('postgresql://u49bewubwrh:83noqEojtC2m@ep-gentle-mountain-a23bxz6h-pooler.eu-central-1.aws.neon.tech/judge_slaw_tarot_465259')
+ }
 
+  
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -299,10 +298,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # This is your main static folder
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
