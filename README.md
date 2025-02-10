@@ -23,7 +23,7 @@ The repository containing the website's source code and assets is available at:
 
 The site was developed with a responsive design, ensuring usability across desktop, tablet, and mobile devices.  
 **Preview Example:**  
-![Responsive Site Example](Docs/readme/readme/cashthatgadget-mockup.png)
+![Responsive Site Example](Docs/readme/cashthatgadget-mockup.png)
 
 ---
 
