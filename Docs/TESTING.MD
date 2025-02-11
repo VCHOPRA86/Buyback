@@ -53,6 +53,30 @@ The CashThatGadget website has been tested using the following methods:
 ### W3C HTML Validator
 The HTML code of the CashThatGadget website has been validated using the W3C HTML Validator. All pages passed without any critical errors or issues.
 
+### Home Page
+<h2 align="center"><img src="assets/readme/"</h2>
+
+### Sell My Gadget Page
+<h2 align="center"><img src="assets/readme/"></h2>
+
+### How It Works Page
+<h2 align="center"><img src="assets/readme/"></h2>
+
+### Why Use Us Page
+<h2 align="center"><img src="assets/readme/"></h2>
+
+### Support Page
+<h2 align="center"><img src="assets/readme/"></h2>
+
+### Contact Us Page
+<h2 align="center"><img src="assets/readme/"></h2>
+
+### Login Page
+<h2 align="center"><img src="assets/readme/"></h2>
+
+### Sign up Page
+<h2 align="center"><img src="assets/readme/"></h2>
+
 ### W3C CSS Validator
 The CSS code has been validated using the W3C CSS Validator. The site passed all checks and there are no major CSS validation issues.
 
