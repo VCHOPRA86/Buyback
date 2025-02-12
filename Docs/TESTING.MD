@@ -20,7 +20,6 @@ The CashThatGadget website has been tested using the following methods:
 - [Peer Review](#peer-review)
 - [Bugs](#bugs)
     - [Resolved](#resolved)
-    - [Unresolved](#unresolved)
 
 - [Code Validation](#code-validation)
     - [W3C HTML Validator](#w3c-html-validator) 
