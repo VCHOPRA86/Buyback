@@ -103,6 +103,12 @@ The website was tested using the **WAVE Webaim Accessibility Checker**. All majo
 ## Lighthouse
 Lighthouse was used to evaluate the website's performance, accessibility, SEO, and best practices. The website scored highly on performance and accessibility, with suggestions for further improvements.
 
+### Homepage
+<h2 align="center"><img src="lighthouse/homepage-desktop.png"</h2>
+
+<h2 align="center"><img src="lighthouse/homepage-mobile.png"</h2>
+
+
 ## Responsiveness
 The website was tested across various screen sizes to ensure it is fully responsive. All elements adjust properly, providing a seamless experience on desktops, tablets, and mobile devices.
 
