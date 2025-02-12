@@ -8,9 +8,6 @@ The CashThatGadget website has been tested using the following methods:
     - [W3C CSS Validator](#w3c-css-validator)
     - [JSHINT Javascript Code Quality Tool](#jshint-javascript-code-quality-tool)
     - [Python Validation using VSCode](python-validation-using-vscode)
-- [Accessibility](#accessibility)
-    - [Colour Contrast](#colour-contrast)
-    - [Wave Webaim Accessibility Checker](#wave-webaim-accessibility-checker)
 - [Lighthouse](#lighthouse)
 - [Responsiveness](#responsiveness)
 - [Browser Compatibility](#browser-compatibility)
@@ -91,14 +88,6 @@ JavaScript code quality has been validated using **JSHint**. No major issues wer
 
 ### Python Validation using VSCode
 The Python code was validated using VSCode. Python linting tools like **Pylint** and **Flake8** were used to ensure code quality, and there were no major issues reported.
-
-## Accessibility
-
-### Colour Contrast
-Colour contrast on all pages was checked to meet accessibility standards, ensuring that text is legible and distinguishable for users with visual impairments.
-
-### Wave Webaim Accessibility Checker
-The website was tested using the **WAVE Webaim Accessibility Checker**. All major accessibility violations were addressed, ensuring compliance with WCAG 2.1 guidelines.
 
 ## Lighthouse
 Lighthouse was used to evaluate the website's performance, accessibility, SEO, and best practices. The website scored highly on performance and accessibility, with suggestions for further improvements.
