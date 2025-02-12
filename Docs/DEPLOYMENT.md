@@ -110,7 +110,7 @@ pip freeze > requirements.txt
 Create a `Procfile` in the root of your project with the following contents:
 
 ```
-web: gunicorn buyback.wsgi
+web: gunicorn buyback.wsgi:application
 ```
 
 This tells Heroku how to run your app using Gunicorn.
