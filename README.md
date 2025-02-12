@@ -234,7 +234,7 @@ The site was developed with a responsive design, ensuring usability across deskt
 
 # Testing  
 
-Details about testing can be found [here](TESTING.MD).  
+Details about testing can be found [Docs/TESTING.MD](TESTING.MD).  
 
 ---
 
