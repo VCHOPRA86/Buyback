@@ -165,6 +165,92 @@ Automated tests were written for core functionalities like registration, posting
 
 ### Resolved
 
+### 1. Issue: Missing Payment Method Handling
+**Description:**
+The revieworder page allowed users to select a payment method, but the backend did not validate or process the selected method properly.
+
+**Cause:**
+The `payment_method` field in the form was not dynamically validated, and fields for the unselected payment method were not being disabled.
+
+**Fix:**
+
+Added JavaScript to dynamically enable and disable input fields based on the selected payment method:
+
+```javascript
+function selectPaymentMethod(method) {
+    const paymentMethodInput = document.getElementById('payment-method');
+    paymentMethodInput.value = method;
+
+    const bankFields = document.getElementById('bank-transfer-fields');
+    const paypalFields = document.getElementById('paypal-fields');
+
+    if (method === 'bank-transfer') {
+        bankFields.style.display = 'block';
+        paypalFields.style.display = 'none';
+    } else if (method === 'paypal') {
+        bankFields.style.display = 'none';
+        paypalFields.style.display = 'block';
+    }
+}
+```
+
+### 2. Issue: Sort Code Input Navigation
+**Description:**
+Entering the sort code fields manually was tedious due to the lack of automatic focus change between input fields.
+
+**Fix:**
+
+Added event listeners to automatically move focus to the next field when two digits are entered:
+
+```javascript
+document.querySelectorAll('.sort-code-container input').forEach((input, index, inputs) => {
+    input.addEventListener('input', (e) => {
+        if (e.target.value.length === 2 && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+        }
+    });
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+            inputs[index - 1].focus();
+        }
+    });
+});
+```
+
+### 3. Issue: AJAX Error in remove_from_cart
+**Description:**
+The "Remove" button on the revieworder page did not dynamically update the cart when an item was removed.
+
+**Cause:**
+The AJAX function was not properly handling the CSRF token or reloading the cart dynamically.
+
+**Fix:**
+
+Updated the `removeFromCart` function to include the CSRF token and refresh the page upon successful removal:
+
+```javascript
+function removeFromCart(itemId) {
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    fetch(`remove-from-cart/${itemId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert('Failed to remove item. Try again.');
+        }
+    })
+    .catch(error => console.error("Error removing item:", error));
+}
+```
+
+
 ### Unresolved
 
 
