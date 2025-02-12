@@ -240,7 +240,7 @@ Details about testing can be found [TESTING.MD](Docs/TESTING.MD).
 
 # Deployment  
 
-Instructions on local and live deployment can be found in the full documentation.  
+Instructions on local and live deployment can be found in the full documentation [here](Docs/DEPLOYMENT.md).   
 
 ---
 
