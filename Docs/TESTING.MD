@@ -80,6 +80,12 @@ The HTML code of the CashThatGadget website has been validated using the W3C HTM
 ### W3C CSS Validator
 The CSS code has been validated using the W3C CSS Validator. The site passed all checks and there are no major CSS validation issues.
 
+### base.css
+<h2 align="center"><img src="css-vaildation/base-css.jpg"</h2>
+
+### mediaqueries.css
+<h2 align="center"><img src="css-vaildation/mediaqueries-css.jpg"</h2>
+
 ### JSHINT Javascript Code Quality Tool
 JavaScript code quality has been validated using **JSHint**. No major issues were detected, ensuring that the scripts follow best practices.
 
