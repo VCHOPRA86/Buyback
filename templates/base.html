@@ -337,15 +337,28 @@
     const searchForm = document.getElementById('search-form2');
     const openButton = document.getElementById('open-search-button');
     
-    if (action === 'open') {
-        searchForm.style.display = 'block';  // Show the search form
-        openButton.style.display = 'none';   // Hide the reopen button when open
-    } else if (action === 'close') {
-        searchForm.style.display = 'none';   // Hide the search form
-        openButton.style.display = 'inline-block'; // Show the reopen button when closed
+    // Check if the elements exist before modifying their style
+    if (searchForm) {
+      if (action === 'open') {
+          searchForm.style.display = 'block';  // Show the search form
+      } else if (action === 'close') {
+          searchForm.style.display = 'none';   // Hide the search form
+      }
+    } else {
+      console.error('Search form element not found');
     }
-}
-
+    
+    // Only try to modify openButton if it exists
+    if (openButton) {
+      if (action === 'open') {
+          openButton.style.display = 'none';   // Hide the reopen button when open
+      } else if (action === 'close') {
+          openButton.style.display = 'inline-block'; // Show the reopen button when closed
+      }
+    } else {
+      console.error('Open button element not found');
+    }
+  }
 </script>
 	  
 
