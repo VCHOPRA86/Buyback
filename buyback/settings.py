@@ -256,8 +256,11 @@ WSGI_APPLICATION = 'buyback.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-     'default': dj_database_url.parse('postgresql://u49bewubwrh:83noqEojtC2m@ep-gentle-mountain-a23bxz6h-pooler.eu-central-1.aws.neon.tech/judge_slaw_tarot_465259')
- }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    } if DEBUG else dj_database_url.parse(os.getenv('DATABASE_URL'))
+}
 
   
 
