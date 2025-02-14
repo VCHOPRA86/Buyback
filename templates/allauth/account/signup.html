@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="container mt-5 my-5">
@@ -16,7 +21,7 @@
 
         <!-- Form Section -->
         <div class="col-lg-8 col-md-12 bg-dark text-white p-5 rounded shadow-lg">
-            <h1 class="text-center mb-4">Register a New Account</h1>
+            <h1 class="text-center new-signup">Register a New Account</h1>
             <form class="custom-form" method="post" action="{% url 'account_signup' %}">
                 {% csrf_token %}
                 {{ form.non_field_errors }}
