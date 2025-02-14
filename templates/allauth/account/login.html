@@ -1,11 +1,16 @@
 {% extends "account/base.html" %}
 
 {% load i18n %}
-{% load static %}  <!-- Add this line to load the static tag -->
+{% load static %}  
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
+
 
 
 
