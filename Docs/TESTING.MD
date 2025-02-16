@@ -7,7 +7,7 @@ The CashThatGadget website has been tested using the following methods:
 - [Overview of the Project](#overview-of-the-project)
 - [Key Features](#key-features)
 - [Development Process](#development-process)
-  - [Project Planning & Requirements Analysis](#project-planning--requirements-analysis)
+  - [Project Planning & Requirements Analysis](#project-planning-requirements-analysis)
   - [Project Setup & Environment Configuration](#project-setup--environment-configuration)
   - [Order Status Management](#order-status-management)
   - [Revised Offer Price Handling](#revised-offer-price-handling)
