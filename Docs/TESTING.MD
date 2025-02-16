@@ -36,7 +36,7 @@ The CashThatGadget website has been tested using the following methods:
 
 ---
 ## Overview of the Project
-The **CashThatGadget** website is a user-friendly platform designed to help users sell their unwanted gadgets for cash. The platform simplifies the process into four easy steps: registering a sale, obtaining free postage, sending the gadget, and receiving payment securely via bank transfer or PayPal. The project also includes a robust admin panel for managing orders, revising offers, and tracking order statuses.
+The **CashThatGadget** website is a user-friendly platform designed to help users sell their unwanted gadgets for cash. The platform simplifies the process into four easy steps: registering a sale, obtaining free postage/seller paid, sending the gadget, and receiving payment securely via bank transfer or PayPal. The project also includes a robust admin panel for managing orders, revising offers, and tracking order statuses.
 
 ## Key Features
 1. **User-Friendly Workflow**: A seamless 4-step process for selling gadgets.
