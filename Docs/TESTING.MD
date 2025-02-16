@@ -7,7 +7,7 @@ The CashThatGadget website has been tested using the following methods:
 - [Overview of the Project](#overview-of-the-project)
 - [Key Features](#key-features)
 - [Development Process](#development-process)
-  - [Project Planning & Requirements Analysis](#project-planning-requirements-analysis)
+  - [Project Planning & Requirements Analysis](#1-project-planning-requirements-analysis)
   - [Project Setup & Environment Configuration](#project-setup--environment-configuration)
   - [Order Status Management](#order-status-management)
   - [Revised Offer Price Handling](#revised-offer-price-handling)
@@ -56,7 +56,7 @@ The development process began with a thorough analysis of the core functionaliti
 - **Payment Processing**: Secure and flexible payment options for customers.
 - **Admin Tools**: A comprehensive admin panel for managing orders, revising prices, and processing payments.
 
-### Project Setup & Environment Configuration
+### 2. Project Setup & Environment Configuration
 - A Django project was initialized with **Python 3.8** as the initial development environment. However, during the deployment phase, it was discovered that **Heroku no longer supported Python 3.8** as it had been deprecated. To resolve this, the project was upgraded to **Python 3.9**, which was the stable version supported by Heroku at the time.
 - The environment was configured with necessary settings for security, database management, and deployment. This included setting up a virtual environment, installing dependencies, and configuring the `requirements.txt` file.
 - Key dependencies such as **Django REST Framework**, **payment processing libraries**, and **email handling tools** were installed to support the platform's core functionalities.
