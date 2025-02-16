@@ -8,7 +8,7 @@ The CashThatGadget website has been tested using the following methods:
 - [Key Features](#key-features)
 - [Development Process](#development-process)
   - [Project Planning & Requirements Analysis](#1-project-planning-requirements-analysis)
-  - [Project Setup & Environment Configuration](#project-setup--environment-configuration)
+  - [Project Setup & Environment Configuration](#2-project-setup--environment-configuration)
   - [Order Status Management](#order-status-management)
   - [Revised Offer Price Handling](#revised-offer-price-handling)
   - [4-Step Process](#4-step-process)
@@ -49,19 +49,19 @@ The **CashThatGadget** website is a user-friendly platform designed to help user
 
 ## Development Process
 
-### 1. **Project Planning & Requirements Analysis**
+### 1 **Project Planning & Requirements Analysis**
 The development process began with a thorough analysis of the core functionalities required for the platform. Key requirements included:
 - **Order Management**: A system to manage gadget sales from submission to payment.
 - **Order Status Tracking**: Real-time updates for customers and admins to track the progress of each transaction.
 - **Payment Processing**: Secure and flexible payment options for customers.
 - **Admin Tools**: A comprehensive admin panel for managing orders, revising prices, and processing payments.
 
-### 2. Project Setup & Environment Configuration
+### 2 Project Setup & Environment Configuration
 - A Django project was initialized with **Python 3.8** as the initial development environment. However, during the deployment phase, it was discovered that **Heroku no longer supported Python 3.8** as it had been deprecated. To resolve this, the project was upgraded to **Python 3.9**, which was the stable version supported by Heroku at the time.
 - The environment was configured with necessary settings for security, database management, and deployment. This included setting up a virtual environment, installing dependencies, and configuring the `requirements.txt` file.
 - Key dependencies such as **Django REST Framework**, **payment processing libraries**, and **email handling tools** were installed to support the platform's core functionalities.
 
-### 3. **Order Status Management**
+### 3 **Order Status Management**
 The order status system was designed to provide transparency for both customers and admins. Key statuses included:
 - **Awaiting Delivery**: The gadget has not yet been received
 - **Received**: The gadget has been received and is undergoing inspection.
@@ -75,7 +75,7 @@ The order status system was designed to provide transparency for both customers 
 
 Each status change triggers notifications to the customer, ensuring they are always informed about their order.
 
-### 4. **Revised Offer Price Handling**
+### 4 **Revised Offer Price Handling**
 A key feature of the platform is the ability to revise the offer price based on the gadget's condition after inspection. The admin panel allows admins to:
 - Adjust/revise the offer price.
 - Provide a reason for the revision.
@@ -83,14 +83,14 @@ A key feature of the platform is the ability to revise the offer price based on 
 
 Customers can then choose to accept or reject the new offer in their account dashboard or have their gadget returned.
 
-### 5. **4-Step Process**
+### 5 **4-Step Process**
 The platform guides users through a simple 4-step process:
 1. **Register Sale**: Users select the category, brand & then product.
 2. **Get Free Postage**: A prepaid postage label is generated for the user.
 3. **Post Your Gadget**: The user sends the gadget.
 4. **Get Fast Payment**: Payment is processed upon completion of the sale.
 
-### 6. **Admin Panel Features with Jazzmin Integration**
+### 6 **Admin Panel Features with Jazzmin Integration**
 The admin panel of this project has been customized using Jazzmin to improve the user experience, especially for site owners who need an intuitive and modern interface to manage various operations efficiently. Unlike the default Django admin, which can be a bit outdated and cumbersome, Jazzmin offers a more user-friendly and visually appealing design. This makes it easier for admins to navigate through the admin tools.
 
 Key features enabled through Jazzmin include:
