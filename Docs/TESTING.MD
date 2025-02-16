@@ -107,6 +107,7 @@ Key features enabled through Jazzmin include:
 - **Global Settings** Where admins can activate the maintenance page and toggle postage options. Both have been activated through Heroku for demonstration purposes.
 
 ---
+# Testing Documentation
 
 ## Code Validation
 
