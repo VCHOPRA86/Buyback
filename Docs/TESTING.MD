@@ -12,7 +12,7 @@ The CashThatGadget website has been tested using the following methods:
   - [Order Status Management](#3-order-status-management)
   - [Revised Offer Price Handling](#4-revised-offer-price-handling)
   - [4-Step Process](#5-4-step-process)
-  - [Admin Panel Features](#6-admin-panel-features)
+  - [Admin Panel Features with Jazzmin Integration](#6-admin-panel-features-with-jazzmin-integration)
 - [Testing Documentation](#testing-documentation)
   - [Code Validation](#code-validation)
     - [W3C HTML Validator](#w3c-html-validator)
