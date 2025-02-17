@@ -254,18 +254,25 @@ The site underwent manual testing to identify edge cases, user interaction patte
 - **Result:** Gadget submission process works smoothly, with validations for missing information, and postage option. The process proceeds to checkout with the correct order summary and the ability to print a shipping label or paid by sender option.
 
 ## 5. Admin Dashboard Testing:
-- **Test Objective:** Ensure admins can manage the site effectively via the admin dashboard.
+
+- **Test Objective:** Ensure admins can manage the site effectively via the admin dashboard, even when maintenance mode is activated.
+
 - **Test Steps:**
   1. Log in as an admin user.
   2. Navigate to the Admin Dashboard.
   3. Verify that the admin can view and manage user accounts, check orders, and update statuses.
   4. Test CRUD operations (Create, Read, Update, Delete) on brands, categories, products, users, and orders.
   5. Test the global settings section for the maintenance page and the Prepaid Postage Label/Paid by Sender options, ensuring they can be toggled on/off.
+  6. **Test Maintenance Mode:**
+     - Ensure that the maintenance page can be activated and deactivated from the global settings section in the admin panel.
+     - Verify that when maintenance mode is activated, the admin can still access and manage the site, while non-admin users are redirected to the maintenance page.
+  
 - **Edge Case Testing:**
   - **Unauthorized Access:** Attempted to access admin pages without admin credentials and ensured that unauthorized users are redirected to a login page.
   - **Invalid Data Entry:** Tested the admin's ability to handle invalid data input (e.g., adding a product with missing required fields or incorrect formatting).
   - **Simultaneous Admin Actions:** Simultaneously tested admin actions on multiple sections to verify there are no concurrency issues or errors during simultaneous updates.
-- **Result:** Admin functionality works as expected, with proper access control and the ability to manage users and content. The settings for maintenance page and postage options are adjustable, and CRUD operations on various entities are functional.
+
+- **Result:** Admin functionality works as expected, with proper access control and the ability to manage users and content. The settings for maintenance page and postage options are adjustable, and CRUD operations on various entities are functional. The maintenance page can be easily toggled in the admin settings, and admins can bypass it to manage the site effectively, while non-admin users are properly redirected to the maintenance page.
 
 ## Conclusion:
 Manual testing has been carried out across critical user flows, including login, sign-up, gadget submission, order placement, and admin dashboard interactions. Edge cases were also considered to ensure the platform is robust and error-free under various scenarios. The results of manual testing confirm that the platform provides a seamless user experience with proper validation and error handling in place.
