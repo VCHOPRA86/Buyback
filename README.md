@@ -265,6 +265,8 @@ Instructions on local and live deployment can be found in the full documentation
 
 - [Cloudinary Integration](https://www.youtube.com/watch?v=gj8bs2lf86A)
 
+- [Maintenance Mode:] Referenced [django-maintenance-mode](https://github.com/fabiocaccamo/django-maintenance-mode) but implemented a custom version.
+
 # Credits  
 
 ### Content  
