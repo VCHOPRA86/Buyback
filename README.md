@@ -44,6 +44,7 @@ The site was developed with a responsive design, ensuring usability across deskt
 - [Why I Chose Certain Tools and Technologies](#Why-I-Chose-Certain-Tools-and-Technologies)
 - [Testing](#testing)
 - [Deployment](#deployment)
+- [Resources Used](#resources-used)
 - [Credits](#credits)
   * [Content](#content)
   * [Code](#code)
