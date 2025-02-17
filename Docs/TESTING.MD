@@ -209,6 +209,68 @@ I also personally tested the website on Cubot kingkong, Dell XPS 15 laptop and a
 ## Manual Testing
 The site underwent manual testing to identify edge cases, user interaction patterns, and potential usability improvements. Testing focused on form submissions, navigation, and content display.
 
+## 1. Login Process:
+- **Test Objective:** Ensure users can log in to their accounts successfully.
+- **Test Steps:**
+  1. Navigate to the login page.
+  2. Enter valid credentials (username/email and password).
+  3. Click the "Login" button.
+  4. Verify the user is redirected to the dashboard or homepage of product detail page (depending on authentication flow).
+- **Edge Case Testing:**
+  - **Invalid Credentials:** Tested with incorrect credentials (e.g., wrong password) and verified that an error message is displayed.
+  - **Empty Fields:** Tested by submitting the form with empty fields and ensured the appropriate error message ("Please fill in fields") appears.
+  - **Password Reset Flow:** Tested the "Forgot Password" link, confirming that the user can request a password reset email and follow the instructions.
+- **Result:** Login works as expected, with correct error messages for invalid input and successful redirection upon valid credentials.
+
+## 2. Sign-Up Process:
+- **Test Objective:** Ensure new users can successfully create an account.
+- **Test Steps:**
+  1. Navigate to the registration page.
+  2. Fill in the required fields (name, email, password, address, etc.).
+  3. Click the "Sign Up" button.
+  4. Verify that the user receives a confirmation email (if applicable) and is redirected to the dashboard or homepage.
+- **Edge Case Testing:**
+  - **Email Format:** Entered an invalid email (e.g., "invalidemail") and confirmed that the form returns an appropriate error message.
+  - **Password Strength:** Entered weak passwords (e.g., "12345") and confirmed the system prompts the user for a stronger password.
+  - **Duplicate Email:** Attempted to register with an email already in use and verified that the user receives an error message ("Email already registered").
+- **Result:** Registration process works correctly with validation for email format, password strength, and duplicate accounts.
+
+## 3. Gadget Submission Process:
+- **Test Objective:** Ensure users can successfully submit their gadgets for evaluation.
+- **Test Steps:**
+  1. Log in to the platform.
+  2. Navigate to the "product" section on the product details page.
+  3. Select the options (e.g., Storage, condition, network) to generate a price.
+  4. Click "Sell This Device."
+  5. Product is then added to the review order cart section, allowing the user to select either bank transfer or PayPal and enter the necessary details.
+  6. Click "Continue Sale," which takes the user to the checkout page.
+  7. Select the postage option and click "Confirm Sale."
+  8. The checkout success page appears with an order summary and a "Print Label" option.
+- **Edge Case Testing:**
+  - **Missing Information:** Attempted submission with missing required fields (e.g., missing storage or condition) to verify that the system displays appropriate error messages.
+  - **Invalid Payment Details:** Tested by entering invalid payment information (e.g., incorrect PayPal details) to ensure that the system prompts for corrections.
+  - **Postage Option:** Verified that an error message is displayed, prompting the user to choose a valid postage option.
+  - **Multiple Devices Submission:** Attempted to submit multiple devices at once to verify that the system handles multiple entries correctly.
+- **Result:** Gadget submission process works smoothly, with validations for missing information, and postage option. The process proceeds to checkout with the correct order summary and the ability to print a shipping label or paid by sender option.
+
+## 5. Admin Dashboard Testing:
+- **Test Objective:** Ensure admins can manage the site effectively via the admin dashboard.
+- **Test Steps:**
+  1. Log in as an admin user.
+  2. Navigate to the Admin Dashboard.
+  3. Verify that the admin can view and manage user accounts, check orders, and update statuses.
+  4. Test CRUD operations (Create, Read, Update, Delete) on brands, categories, products, users, and orders.
+  5. Test the global settings section for the maintenance page and the Prepaid Postage Label/Paid by Sender options, ensuring they can be toggled on/off.
+- **Edge Case Testing:**
+  - **Unauthorized Access:** Attempted to access admin pages without admin credentials and ensured that unauthorized users are redirected to a login page.
+  - **Invalid Data Entry:** Tested the admin's ability to handle invalid data input (e.g., adding a product with missing required fields or incorrect formatting).
+  - **Simultaneous Admin Actions:** Simultaneously tested admin actions on multiple sections to verify there are no concurrency issues or errors during simultaneous updates.
+- **Result:** Admin functionality works as expected, with proper access control and the ability to manage users and content. The settings for maintenance page and postage options are adjustable, and CRUD operations on various entities are functional.
+
+## Conclusion:
+Manual testing has been carried out across critical user flows, including login, sign-up, gadget submission, order placement, and admin dashboard interactions. Edge cases were also considered to ensure the platform is robust and error-free under various scenarios. The results of manual testing confirm that the platform provides a seamless user experience with proper validation and error handling in place.
+
+
 ## Automated Testing
 Automated tests were written for core functionalities like registration, posting a gadget, and completing a sale. These tests ensure that the website works reliably after updates.
 
