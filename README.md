@@ -256,6 +256,15 @@ Instructions on local and live deployment can be found in the full documentation
 
 ---
 
+# Resources Used
+
+### Tutorials Followed
+
+
+- [Jazzmin Setup](https://www.youtube.com/watch?v=zx4LSW0QBq0)  
+
+- [Cloudinary Integration](https://www.youtube.com/watch?v=gj8bs2lf86A)
+
 # Credits  
 
 ### Content  
